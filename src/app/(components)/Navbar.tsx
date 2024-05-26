@@ -1,7 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-
+import { FaShoppingCart } from "react-icons/fa";
+import { HiOutlineUserCircle } from "react-icons/hi";
+import { RiSearchLine, RiArrowDropDownLine } from "react-icons/ri";
 const Navbar = () => {
   return (
     <>
@@ -23,7 +25,7 @@ const Navbar = () => {
                 href="/shop"
                 className="text-black text-xl p-2 hover:border-b-2 border-gray-300"
               >
-                Shop {/* Add Icon Here */}
+                Shop <RiArrowDropDownLine />
               </Link>
             </div>
             <div>
@@ -57,15 +59,15 @@ const Navbar = () => {
               type="text"
               placeholder="Search for products..."
             />
-            {/* Add Icon Here */}
+            <RiSearchLine />
           </div>
         </div>
         <div className="flex justify-around items-center w-[13%] mt-2.5">
           <Link href="/cart" className="text-black ml-2.5 text-2xl">
-            {/* <FaShoppingCart /> */}
+            <FaShoppingCart />
           </Link>
           <Link href="/login" className="text-black ml-2.5 text-2xl">
-            {/* <HiOutlineUserCircle /> */}
+            <HiOutlineUserCircle />
           </Link>
         </div>
       </div>

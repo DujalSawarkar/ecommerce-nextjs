@@ -1,31 +1,51 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-// import { axios } from "axios";
+import axios from "axios";
 
 const LoginPage = () => {
+  const Router = useRouter();
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
   });
+  const [loading, setloading] = React.useState(false);
+  const [buttonDisable, setbuttonDisable] = React.useState(false);
 
-  const onSignup = () => {
+  const onLogin = async () => {
     try {
-      console.log("hhh");
+      console.log(formData);
+
+      setloading(true);
+      const response = await axios.post("/api/users/login", formData);
+      console.log("login", response);
+
+      Router.push("/");
     } catch (error) {
       console.log(error);
     }
   };
-
+  useEffect(() => {
+    if (formData.email.length > 0 && formData.password.length > 0) {
+      setbuttonDisable(false);
+    } else {
+      setbuttonDisable(true);
+    }
+  }, [formData]);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 bg-white shadow-md rounded-md">
-        <h1 className="mb-6 text-2xl font-bold text-center text-black">Login Form</h1>
+        <h1 className="mb-6 text-2xl font-bold text-center text-black">
+          Login Form
+        </h1>
 
         <div className="mb-4">
-          <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-700">
+          <label
+            htmlFor="email"
+            className="block mb-2 text-sm font-medium text-gray-700"
+          >
             Email
           </label>
           <input
@@ -33,13 +53,18 @@ const LoginPage = () => {
             placeholder="Write an email"
             type="email"
             value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
         <div className="mb-4">
-          <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-700">
+          <label
+            htmlFor="password"
+            className="block mb-2 text-sm font-medium text-gray-700"
+          >
             Password
           </label>
           <input
@@ -47,20 +72,25 @@ const LoginPage = () => {
             placeholder="Write a password"
             type="password"
             value={formData.password}
-            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, password: e.target.value })
+            }
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
         <button
-          onClick={onSignup}
+          onClick={onLogin}
           className="w-full px-4 py-2 mb-4 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          Login
+          {buttonDisable ? "Can't log in" : "Log in "}
         </button>
 
         <div className="text-center">
-          <Link href="/signup" className="text-sm text-blue-500 hover:underline">
+          <Link
+            href="/signup"
+            className="text-sm text-blue-500 hover:underline"
+          >
             Don't have an account? Sign up
           </Link>
         </div>
