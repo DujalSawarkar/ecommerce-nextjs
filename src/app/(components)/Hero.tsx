@@ -3,9 +3,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Card from "./Card/Card";
 // import getdata from "../Data";
 // import Cards from "../components/Card/Cards";
-
+const data = {
+  _id: "123",
+  item_type: "product",
+  rate: 4,
+  imageUrl: "/path/to/image.jpg",
+  title: "Sample Product",
+  discount: 50,
+  price: 100,
+  discountPercent: 50,
+};
 const Hero = () => {
   const [Data, setData] = useState([]);
 
@@ -87,8 +97,7 @@ const Hero = () => {
         </div>
       ) : (
         // <Cards Data={Data} head={head1} key={1} />
-
-        <h1>cards</h1>
+        <Card data={data} />
       )}
       <hr className="w-4/5 mx-auto my-8" />
       {Data == null ? (
