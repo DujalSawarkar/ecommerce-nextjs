@@ -21,7 +21,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
   const divArray = Array.from({ length: data.rate }, (_, index) => index);
 
   return (
-    <Link href={`/${type}?id=${id}`}>
+    <Link href={`/${type}/${id}`}>
       <div className="transition ease-in-out duration-400 my-4 hover:scale-105 hover:cursor-pointer">
         <Image
           src={data.imageUrl}

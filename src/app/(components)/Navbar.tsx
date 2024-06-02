@@ -23,7 +23,7 @@ const Navbar = () => {
             <div>
               <Link
                 href="/shop"
-                className="text-black text-xl p-2 hover:border-b-2 border-gray-300"
+                className="flex justify-center items-center text-black text-xl p-2 hover:border-b-2 border-gray-300"
               >
                 Shop <RiArrowDropDownLine />
               </Link>
