@@ -22,7 +22,7 @@ const Navbar = () => {
           <div className="flex justify-center items-center gap-4">
             <div>
               <Link
-                href="/shop"
+                href="/category"
                 className="flex justify-center items-center text-black text-xl p-2 hover:border-b-2 border-gray-300"
               >
                 Shop <RiArrowDropDownLine />
