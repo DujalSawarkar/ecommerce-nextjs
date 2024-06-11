@@ -4,7 +4,7 @@ import star from "../public/star.png";
 
 interface CardProps {
   data: {
-    _id: string;
+    id: string;
     item_type: string;
     rate: number;
     imageUrl: string;
@@ -16,12 +16,12 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ data }) => {
-  const id = data._id;
+  const id = data.id;
   const type = data.item_type;
   const divArray = Array.from({ length: data.rate }, (_, index) => index);
 
   return (
-    <Link href={`/${type}/${id}`}>
+    <Link href={`/product/${id}`}>
       <div className="transition ease-in-out duration-400 my-4 hover:scale-105 hover:cursor-pointer">
         <Image
           src={data.imageUrl}

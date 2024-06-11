@@ -3,9 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Card from "./Card/Card";
-// import getdata from "../Data";
-// import Cards from "../components/Card/Cards";
+
+import Cards from "./Card/Cards";
+
 const data = {
   _id: "123",
   item_type: "product",
@@ -96,8 +96,7 @@ const Hero = () => {
           <div className="loader"></div>
         </div>
       ) : (
-        // <Cards Data={Data} head={head1} key={1} />
-        <Card data={data} />
+        <Cards head={head2} key={2} />
       )}
       <hr className="w-4/5 mx-auto my-8" />
       {Data == null ? (
@@ -105,8 +104,8 @@ const Hero = () => {
           <div className="loader"></div>
         </div>
       ) : (
-        // <Cards Data={Data} head={head2} key={2} />
-        <h1>cards</h1>
+        <Cards head={head2} key={2} />
+        // <h1>cards</h1>
       )}
       <div className="flex flex-col items-center bg-gray-200 border border-black w-4/5 mx-auto rounded-[50px] p-6 my-8">
         <p className="text-4xl font-extrabold mb-12">BROWSE BY DRESS STYLE</p>
