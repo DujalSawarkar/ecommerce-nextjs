@@ -28,7 +28,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
           alt="#"
           width={288}
           height={320}
-          className="rounded-[15px] h-[20rem] w-[18rem] bg-[#F0EEED] my-2"
+          className="rounded-[15px] h-[20rem] w-[18rem] bg-[#F0EEED] my-2 fit-cover"
         />
         <h3 className="text-xl font-bold leading-[27px] uppercase text-left">
           {data.title}

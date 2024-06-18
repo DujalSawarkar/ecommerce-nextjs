@@ -1,4 +1,15 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    domains: [
+      "www.pinterest.com",
+      "www.shutterstock.com",
+      "example.com",
+      "unsplash.com",
+      "www.istockphoto.com",
+      "www.alamy.com",
+    ], // Replace with your list of external domains
+  },
+};
 
 export default nextConfig;

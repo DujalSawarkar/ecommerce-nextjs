@@ -83,7 +83,7 @@ const Category = () => {
   return (
     <div>
       {/* <RouteCard category={categoryId} /> */}
-      <div className="w-[95%] flex gap-[2rem] mx-auto categoryBody">
+      <div className="w-[95%] flex gap-[2rem] mx-auto categoryBody mt-10 mb-10">
         <div
           className={
             filterHide

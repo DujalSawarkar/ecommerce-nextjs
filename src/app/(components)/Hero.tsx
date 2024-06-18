@@ -6,16 +6,16 @@ import { useEffect, useState } from "react";
 
 import Cards from "./Card/Cards";
 
-const data = {
-  _id: "123",
-  item_type: "product",
-  rate: 4,
-  imageUrl: "/path/to/image.jpg",
-  title: "Sample Product",
-  discount: 50,
-  price: 100,
-  discountPercent: 50,
-};
+// const data = {
+//   _id: "123",
+//   item_type: "product",
+//   rate: 4,
+//   imageUrl: "/path/to/image.jpg",
+//   title: "Sample Product",
+//   discount: 50,
+//   price: 100,
+//   discountPercent: 50,
+// };
 const Hero = () => {
   const [Data, setData] = useState([]);
 
@@ -41,7 +41,7 @@ const Hero = () => {
               className="object-cover"
             />
             <div className="absolute top-[15%] left-[5%] h-full w-[45%]">
-              <div className="text-4xl font-extrabold leading-[62px]">
+              <div className="text-5xl font-extrabold leading-[50px]">
                 FIND CLOTHES THAT MATCH YOUR STYLE
               </div>
               <p className="text-lg font-normal leading-[22px] text-gray-600 my-6">

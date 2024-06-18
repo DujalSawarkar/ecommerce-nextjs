@@ -30,7 +30,7 @@ const Navbar = () => {
             </div>
             <div>
               <Link
-                href="/on-sales"
+                href="/category"
                 className="text-black text-xl p-2 hover:border-b-2 border-gray-300"
               >
                 On Sales
@@ -38,7 +38,7 @@ const Navbar = () => {
             </div>
             <div>
               <Link
-                href="/new-arrivals"
+                href="/category"
                 className="text-black text-xl p-2 hover:border-b-2 border-gray-300"
               >
                 New Arrivals
@@ -46,7 +46,7 @@ const Navbar = () => {
             </div>
             <div>
               <Link
-                href="/brands"
+                href="/category"
                 className="text-black text-xl p-2 hover:border-b-2 border-gray-300"
               >
                 Brands
@@ -59,7 +59,7 @@ const Navbar = () => {
               type="text"
               placeholder="Search for products..."
             />
-            <RiSearchLine />
+            <RiSearchLine className="absolute top-4 left-4" />
           </div>
         </div>
         <div className="flex justify-around items-center w-[13%] mt-2.5">

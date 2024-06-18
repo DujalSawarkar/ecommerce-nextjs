@@ -23,7 +23,7 @@ const Cards: React.FC<{ head: string }> = ({ head }) => {
         ))}
       </div>
       <button
-        className="w-56 h-13 text-xl rounded-full border border-gray-200 transition duration-300 ease-in-out hover:bg-black hover:text-white"
+        className="w-56 h-12 text-xl rounded-full border border-gray-200 transition duration-300 ease-in-out hover:bg-black hover:text-white"
         onClick={() => setView(!view)}
       >
         {view ? "View Less" : "View All"}
