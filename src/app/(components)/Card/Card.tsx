@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import star from "../public/star.png";
+// import star from "../public/star.png";
 
 interface CardProps {
   data: {
@@ -50,7 +50,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
           {data.discount ? (
             <>
               <h2 className="text-xl font-bold leading-[32px]">
-                ${data.discount}
+                ${(data.discount)}
               </h2>
               <p className="text-xl font-bold leading-[32px] line-through text-gray-500">
                 ${data.price}

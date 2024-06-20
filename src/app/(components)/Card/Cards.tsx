@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Card from "./Card";
-
-import Data2 from "@/Data2.js";
+import Data from "@/Data.js";
 interface DataType {
   _id: string;
   name: string;
@@ -10,7 +9,7 @@ interface DataType {
 
 const Cards: React.FC<{ head: string }> = ({ head }) => {
   const [view, setView] = useState(false);
-  const Data: any = Data2;
+  // const Data: any = Data;
 
   return (
     <div className="flex flex-col items-center justify-center m-16 transition duration-800 ease-in-out">
@@ -18,8 +17,8 @@ const Cards: React.FC<{ head: string }> = ({ head }) => {
         {head}
       </h1>
       <div className="flex flex-wrap items-center justify-center gap-4 m-8">
-        {(view ? Data : Data.slice(0, 4)).map((data : any) => (
-          <Card key={data._id} data={data} />
+        {(view ? Data : Data.slice(0, 4)).map((data: any) => (
+          <Card key={data.id} data={data} />
         ))}
       </div>
       <button

@@ -3,7 +3,7 @@ import "./ratingreview.css";
 import { HiOutlineAdjustmentsVertical } from "react-icons/hi2";
 import { RiArrowDownSLine } from "react-icons/ri";
 // import Comment from "../../comment/comment.jsx";
-import Data2 from "../../Data2.js";
+import Data2 from "../api/product/route";
 const RatingReview = () => {
   return (
     <div className="RatingReview">
