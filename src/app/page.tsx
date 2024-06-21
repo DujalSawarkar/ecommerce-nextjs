@@ -4,17 +4,17 @@ import Hero from "./(components)/Hero";
 import axios from "axios";
 
 const Home = () => {
-  const [Productdata, setProductdata] = useState({});
+  const [Productdata, setProductdata] = useState([]);
   const FetchProductData = async () => {
     try {
       const res = await axios.get("api/product");
-      setProductdata(res.data.data);
-      console.log(res.data.data);
-      // console.log(await Productdata);
+      const resdata = await res.data.data;
+      setProductdata(resdata);
     } catch (error) {
       console.log(error);
     }
   };
+  // console.log(Productdata);
 
   useEffect(() => {
     FetchProductData();

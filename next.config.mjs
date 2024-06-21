@@ -8,6 +8,7 @@ const nextConfig = {
       "unsplash.com",
       "www.istockphoto.com",
       "www.alamy.com",
+      "res.cloudinary.com",
     ], // Replace with your list of external domains
   },
 };

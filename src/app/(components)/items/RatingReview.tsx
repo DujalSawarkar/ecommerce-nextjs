@@ -3,7 +3,7 @@ import "./ratingreview.css";
 import { HiOutlineAdjustmentsVertical } from "react-icons/hi2";
 import { RiArrowDownSLine } from "react-icons/ri";
 // import Comment from "../../comment/comment.jsx";
-import Data2 from "../api/product/route";
+
 const RatingReview = () => {
   return (
     <div className="RatingReview">
@@ -23,10 +23,10 @@ const RatingReview = () => {
         </div>
       </div>
       <div className="RatingReview-div2">
-        {Data2.map((data) => (
+        {/* {Data2.map((data) => (
           // <Comment data={data} key={data.id} />
           <div>comments</div>
-        ))}
+        ))} */}
       </div>
     </div>
   );

@@ -7,11 +7,11 @@ import { BsCheckLg } from "react-icons/bs";
 import Image from "next/image";
 import { GetServerSideProps } from "next";
 import axios from "axios";
-import RatingReview from "@/app/(components)/RatingReview";
-import Faq from "@/app/(components)/Faq";
-import ProductInfo from "@/app/(components)/ProductInfo";
+import RatingReview from "@/app/(components)/items/RatingReview";
+import Faq from "@/app/(components)/items/Faq";
+import ProductInfo from "@/app/(components)/items/ProductInfo";
 import { useParams } from "next/navigation";
-import Data2 from "@/Data2.js";
+
 import Cards from "@/app/(components)/Card/Cards";
 
 interface ItemProps {
@@ -195,7 +195,7 @@ const Item: React.FC<ItemProps> = () => {
           You might also like
         </h1>
         <div className="w-full flex flex-wrap gap-6">
-          <Cards head="You might also like" />
+          {/* <Cards head="You might also like" /> */}
           {/* {initialData[1].map((e, index) => (
             <Card key={index} data={e} />
           ))} */}

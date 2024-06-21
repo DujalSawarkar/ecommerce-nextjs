@@ -16,15 +16,10 @@ import Cards from "./Card/Cards";
 //   price: 100,
 //   discountPercent: 50,
 // };
-const Hero = () => {
-  const [Data, setData] = useState([]);
-
-  // useEffect(() => {
-  //   getdata().then((data) => {
-  //     setData(data);
-  //   });
-  // }, []);
-
+const Hero = ({ data }) => {
+  // const [Data, setData] = useState([]);
+  // setData(data);
+  const Data = data;
   const head1 = "NEW ARRIVALS";
   const head2 = "TOP SELLINGS";
 
@@ -96,7 +91,7 @@ const Hero = () => {
           <div className="loader"></div>
         </div>
       ) : (
-        <Cards head={head2} key={2} />
+        <Cards head={head1} key={2} data={Data} />
       )}
       <hr className="w-4/5 mx-auto my-8" />
       {Data == null ? (
@@ -104,65 +99,71 @@ const Hero = () => {
           <div className="loader"></div>
         </div>
       ) : (
-        <Cards head={head2} key={2} />
+        <Cards head={head2} key={2} data={Data} />
         // <h1>cards</h1>
       )}
       <div className="flex flex-col items-center bg-gray-200 border border-black w-4/5 mx-auto rounded-[50px] p-6 my-8">
         <p className="text-4xl font-extrabold mb-12">BROWSE BY DRESS STYLE</p>
         <div className="flex flex-wrap gap-8 justify-center items-center mb-16">
-          <div className="relative transition-transform transform hover:scale-105">
-            <Link href="/category/casuals">
-              <h1 className="absolute top-4 left-4 text-2xl font-bold">
-                Casual
-              </h1>
-              <Image
-                src="/imgs/Cloth-img/image11.png"
-                alt="Casual"
-                width={480}
-                height={300}
-                className="rounded-[30px]"
-              />
-            </Link>
+          <div>
+            <div className="relative transition-transform transform hover:scale-105">
+              <Link href="/category/casuals">
+                <h1 className="absolute top-4 left-4 text-2xl font-bold">
+                  Casual
+                </h1>
+                <Image
+                  src="/imgs/Cloth-img/image11.png"
+                  alt="Casual"
+                  width={480}
+                  height={300}
+                  className="rounded-[30px]"
+                />
+              </Link>
+            </div>
+            <div className="relative transition-transform transform hover:scale-105">
+              <Link href="/category/formals">
+                <h1 className="absolute top-4 left-4 text-2xl font-bold">
+                  Formal
+                </h1>
+                <Image
+                  src="/imgs/Cloth-img/image13.png"
+                  alt="Formal"
+                  width={480}
+                  height={300}
+                  className="rounded-[30px]"
+                />
+              </Link>
+            </div>
           </div>
-          <div className="relative transition-transform transform hover:scale-105">
-            <Link href="/category/formals">
-              <h1 className="absolute top-4 left-4 text-2xl font-bold">
-                Formal
-              </h1>
-              <Image
-                src="/imgs/Cloth-img/image13.png"
-                alt="Formal"
-                width={480}
-                height={300}
-                className="rounded-[30px]"
-              />
-            </Link>
-          </div>
-          <div className="relative transition-transform transform hover:scale-105">
-            <Link href="/category/party">
-              <h1 className="absolute top-4 left-4 text-2xl font-bold">
-                Party
-              </h1>
-              <Image
-                src="/imgs/Cloth-img/image12.png"
-                alt="Party"
-                width={480}
-                height={300}
-                className="rounded-[30px]"
-              />
-            </Link>
-          </div>
-          <div className="relative transition-transform transform hover:scale-105">
-            <Link href="/category/gym">
-              <h1 className="absolute top-4 left-4 text-2xl font-bold">Gym</h1>
-              <Image
-                src="/imgs/Cloth-img/image14.png"
-                alt="Gym"
-                width={480}
-                height={300}
-                className="rounded-[30px]"
-              />
-            </Link>
+          <div>
+            <div className="relative transition-transform transform hover:scale-105">
+              <Link href="/category/party">
+                <h1 className="absolute top-4 left-4 text-2xl font-bold">
+                  Party
+                </h1>
+                <Image
+                  src="/imgs/Cloth-img/image12.png"
+                  alt="Party"
+                  width={480}
+                  height={300}
+                  className="rounded-[30px]"
+                />
+              </Link>
+            </div>
+            <div className="relative transition-transform transform hover:scale-105">
+              <Link href="/category/gym">
+                <h1 className="absolute top-4 left-4 text-2xl font-bold">
+                  Gym
+                </h1>
+                <Image
+                  src="/imgs/Cloth-img/image14.png"
+                  alt="Gym"
+                  width={480}
+                  height={300}
+                  className="rounded-[30px]"
+                />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
