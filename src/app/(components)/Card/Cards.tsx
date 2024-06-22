@@ -21,7 +21,7 @@ const Cards: React.FC<{ head: string; data: any }> = ({ head, data }) => {
         {head}
       </h1>
       <div className="flex flex-wrap items-center justify-center gap-4 m-8">
-        {(view ? data : slicedata).map((item) => (
+        {(view ? data : slicedata).map((item: any) => (
           <Card key={item._id} data={item} />
         ))}
       </div>

@@ -16,10 +16,10 @@ import Cards from "./Card/Cards";
 //   price: 100,
 //   discountPercent: 50,
 // };
-const Hero = ({ data }) => {
+const Hero = (props: any) => {
   // const [Data, setData] = useState([]);
   // setData(data);
-  const Data = data;
+  const Data = props.data;
   const head1 = "NEW ARRIVALS";
   const head2 = "TOP SELLINGS";
 
