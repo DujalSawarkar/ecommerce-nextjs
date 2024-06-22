@@ -174,7 +174,7 @@ const Item: React.FC<ItemProps> = () => {
 
       <div className="flex flex-col justify-center items-center mt-20">
         <div className="w-9/12 flex justify-evenly items-center mb-4">
-          {ratingComp.map((rate, index) => (
+          {/* {ratingComp.map((rate, index) => (
             <button
               key={index}
               className={`text-xl font-medium text-center transition p-4 w-full h-full border-b border-gray-200 ${
@@ -183,7 +183,7 @@ const Item: React.FC<ItemProps> = () => {
             >
               {rate.name}
             </button>
-          ))}
+          ))} */}
         </div>
         <div>{ratingComp[0].isActive && <ProductInfo />}</div>
         <div>{ratingComp[1].isActive && <RatingReview />}</div>
