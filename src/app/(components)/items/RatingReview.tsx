@@ -1,5 +1,5 @@
 import React from "react";
-import "./ratingreview.css";
+// import "./ratingreview.css";
 import { HiOutlineAdjustmentsVertical } from "react-icons/hi2";
 import { RiArrowDownSLine } from "react-icons/ri";
 // import Comment from "../../comment/comment.jsx";
