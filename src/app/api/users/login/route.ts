@@ -1,5 +1,6 @@
 import { connect } from "@/dbconfig/dbConfig";
-// import User from "@/models/userModel";
+import User from "@/models/userModel";
+
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 
