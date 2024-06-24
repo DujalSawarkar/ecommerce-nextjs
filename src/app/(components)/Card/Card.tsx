@@ -16,9 +16,10 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ data }) => {
-  const id = data.id;
+  const id: string = data._id;
   const type = data.item_type;
   const divArray = Array.from({ length: data.rate }, (_, index) => index);
+  // console.log(type, id);
 
   return (
     <Link href={`/product/${id}`}>
@@ -50,7 +51,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
           {data.discount ? (
             <>
               <h2 className="text-xl font-bold leading-[32px]">
-                ${(data.discount)}
+                ${data.discount}
               </h2>
               <p className="text-xl font-bold leading-[32px] line-through text-gray-500">
                 ${data.price}
