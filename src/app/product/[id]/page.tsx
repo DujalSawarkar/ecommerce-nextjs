@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import star from "@/app/imgs/PaymentImg/star.png";
+import star from "@/app/imgs/PaymentImg/Star.png";
 import { BsCheckLg } from "react-icons/bs";
 import Image from "next/image";
 import RatingReview from "@/app/(components)/items/RatingReview";

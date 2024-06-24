@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-// import star from "../public/star.png";
+import star from "@/app/imgs/PaymentImg/Star.png";
 
 interface CardProps {
   data: {
@@ -37,14 +37,14 @@ const Card: React.FC<CardProps> = ({ data }) => {
         </h3>
         <div className="flex items-center">
           {divArray.map((_, index) => (
-            // <Image
-            //   key={index}
-            //   src={star}
-            //   alt="star"
-            //   className="w-[18.49px] h-[18.49px] m-[0.5rem_0.1rem_0.5rem_0]"
-            // />
+            <Image
+              key={index}
+              src={star}
+              alt="star"
+              className="w-[18.49px] h-[18.49px] m-[0.5rem_0.1rem_0.5rem_0]"
+            />
 
-            <h1>start</h1>
+            // <h1>start</h1>
           ))}
           <p className="ml-1 pt-1">{`${data.rate}.0/5`}</p>
         </div>
