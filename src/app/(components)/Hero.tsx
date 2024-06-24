@@ -7,14 +7,13 @@ import rectangle2 from "@/app/imgs/Rectangle2.png";
 import vector from "@/app/imgs/Vector.png";
 import group from "@/app/imgs/Group.png";
 import zara from "@/app/imgs/Zara.png";
-import gucci from "@/app/imgs/Gucci.png";
-import prada from "@/app/imgs/Prada.png";
+import gucci from "@/app/imgs/gucci.png";
+import prada from "@/app/imgs/prada.png";
 import calvin from "@/app/imgs/Calvin.png";
-import image11 from "@/app/imgs/image11.png";
-import image12 from "@/app/imgs/image12.png";
-import image13 from "@/app/imgs/image13.png";
-import image14 from "@/app/imgs/image14.png";
-
+import image11 from "@/app/imgs/Cloth-img/image11.png";
+import image12 from "@/app/imgs/Cloth-img/image12.png";
+import image13 from "@/app/imgs/Cloth-img/image13.png";
+import image14 from "@/app/imgs/Cloth-img/image14.png";
 import Cards from "./Card/Cards";
 
 // const data = {
