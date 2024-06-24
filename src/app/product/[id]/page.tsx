@@ -2,38 +2,35 @@
 
 import React, { useState, useEffect } from "react";
 import star from "@/app/imgs/PaymentImg/star.png";
-
 import { BsCheckLg } from "react-icons/bs";
 import Image from "next/image";
 import RatingReview from "@/app/(components)/items/RatingReview";
 import Faq from "@/app/(components)/items/Faq";
 import ProductInfo from "@/app/(components)/items/ProductInfo";
 import { useParams } from "next/navigation";
-// import axios from "axios";
+import Card from "@/app/(components)/Card/Card";
 
-interface ItemProps {
-  initialData?: any;
-}
+// interface ItemProps {
+//   initialData?: any;
+// }
 
-const Item: React.FC<ItemProps> = () => {
+const Item = () => {
   const { id } = useParams();
-  // console.log(id);
-
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
+
   const fetchData = async () => {
     setLoading(true);
     try {
       const response = await fetch(`/api/item/${id}`);
       const result = await response.json();
-      console.log(result.data);
-
-      setData(result.data);
+      setData(result.data); // Ensure you're accessing the correct part of the response
     } catch (error) {
       console.error("Error fetching data:", error);
     }
     setLoading(false);
   };
+
   useEffect(() => {
     fetchData();
   }, [id]);
@@ -58,7 +55,7 @@ const Item: React.FC<ItemProps> = () => {
     { name: "bg-[#7bbd7e]", isActive: false },
   ];
 
-  const Sizebtn = [
+  const sizeOptions = [
     { name: "Small", isActive: false },
     { name: "Medium", isActive: true },
     { name: "Large", isActive: false },
@@ -72,7 +69,7 @@ const Item: React.FC<ItemProps> = () => {
       <div className="w-full mx-auto flex px-4 pb-6 mb-4">
         <div className="h-[75vh] w-3/4 flex">
           <div className="w-3/10">
-            {color.map((index: any) => (
+            {color.map((colorOption, index) => (
               <div key={index} className="mb-4 mr-4">
                 <Image
                   src={data.imageUrl}
@@ -143,7 +140,7 @@ const Item: React.FC<ItemProps> = () => {
             Choose Size
           </p>
           <div className="flex gap-4 mb-4">
-            {Sizebtn.map((size, index) => (
+            {sizeOptions.map((size, index) => (
               <button
                 key={index}
                 className={`flex justify-center items-center py-2 px-4 rounded-full bg-gray-200 text-base font-normal text-gray-600 transition w-28 h-12 mb-4 ${
@@ -170,7 +167,7 @@ const Item: React.FC<ItemProps> = () => {
 
       <div className="flex flex-col justify-center items-center mt-20">
         <div className="w-9/12 flex justify-evenly items-center mb-4">
-          {/* {ratingComp.map((rate, index) => (
+          {ratingComp.map((rate, index) => (
             <button
               key={index}
               className={`text-xl font-medium text-center transition p-4 w-full h-full border-b border-gray-200 ${
@@ -179,7 +176,7 @@ const Item: React.FC<ItemProps> = () => {
             >
               {rate.name}
             </button>
-          ))} */}
+          ))}
         </div>
         <div>{ratingComp[0].isActive && <ProductInfo />}</div>
         <div>{ratingComp[1].isActive && <RatingReview />}</div>
@@ -192,7 +189,7 @@ const Item: React.FC<ItemProps> = () => {
         </h1>
         <div className="w-full flex flex-wrap gap-6">
           {/* <Cards head="You might also like" /> */}
-          {/* {data.relatedItems.map((item, index) => (
+          {/* {data.relatedItems?.map((item: any, index: number) => (
             <Card key={index} data={item} />
           ))} */}
         </div>

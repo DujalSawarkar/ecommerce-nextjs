@@ -4,6 +4,7 @@ import Link from "next/link";
 
 interface CardProps {
   data: {
+    _id: string;
     id: string;
     item_type: string;
     rate: number;
