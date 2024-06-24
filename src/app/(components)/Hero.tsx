@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-
+import rectangle2 from "@/app/imgs/Rectangle2.png";
+import vector from "@/app/imgs/Vector.png";
 import Cards from "./Card/Cards";
 
 // const data = {
@@ -30,7 +31,7 @@ const Hero = (props: any) => {
         <div className="relative h-[90vh] mb-[-7px]">
           <div className="h-[90vh]">
             <Image
-              src="/imgs/Rectangle2.png"
+              src={rectangle2}
               alt="Main Image"
               layout="fill"
               className="object-cover"
@@ -72,19 +73,24 @@ const Hero = (props: any) => {
             </div>
           </div>
           <div className="absolute w-20 top-[10%] left-[90%]">
-            <Image src="/imgs/Vector.png" alt="Star" layout="fill" />
+            <Image src={vector} alt="Star" layout="fill" />
           </div>
           <div className="absolute w-16 top-[43%] left-[52%]">
-            <Image src="/imgs/Vector.png" alt="Star" layout="fill" />
+            <Image src={vector} alt="Star" layout="fill" />
           </div>
         </div>
       </div>
       <div className="bg-black w-full h-24 flex justify-around items-center">
-        <Image src="/imgs/Group.png" alt="Group" width={100} height={50} />
-        <Image src="/imgs/Zara.png" alt="Zara" width={100} height={50} />
-        <Image src="/imgs/gucci.png" alt="Gucci" width={100} height={50} />
-        <Image src="/imgs/prada.png" alt="Prada" width={100} height={50} />
-        <Image src="/imgs/Calvin.png" alt="Calvin" width={100} height={50} />
+        <Image src="/app/imgs/Group.png" alt="Group" width={100} height={50} />
+        <Image src="/app/imgs/Zara.png" alt="Zara" width={100} height={50} />
+        <Image src="/app/imgs/gucci.png" alt="Gucci" width={100} height={50} />
+        <Image src="/app/imgs/prada.png" alt="Prada" width={100} height={50} />
+        <Image
+          src="/app/imgs/Calvin.png"
+          alt="Calvin"
+          width={100}
+          height={50}
+        />
       </div>
       {Data == null ? (
         <div className="flex justify-center items-center h-[80vh]">

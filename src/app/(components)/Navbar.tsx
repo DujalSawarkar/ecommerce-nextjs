@@ -4,18 +4,14 @@ import Image from "next/image";
 import { FaShoppingCart } from "react-icons/fa";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import { RiSearchLine, RiArrowDropDownLine } from "react-icons/ri";
+import shopco from "@/app/imgs/SHOP.CO.png";
 const Navbar = () => {
   return (
     <>
       <div className="flex justify-around items-center p-4 bg-white h-[11vh]">
         <div className="flex-shrink-0 pl-5">
           <Link href="/">
-            <Image
-              src="/imgs/SHOP.CO.png"
-              alt="Your Logo"
-              width={208}
-              height={52}
-            />
+            <Image src={shopco} alt="Your Logo" width={208} height={52} />
           </Link>
         </div>
         <div className="flex justify-center items-center w-[80%] mx-6">
