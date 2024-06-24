@@ -5,6 +5,16 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import rectangle2 from "@/app/imgs/Rectangle2.png";
 import vector from "@/app/imgs/Vector.png";
+import group from "@/app/imgs/Group.png";
+import zara from "@/app/imgs/Zara.png";
+import gucci from "@/app/imgs/Gucci.png";
+import prada from "@/app/imgs/Prada.png";
+import calvin from "@/app/imgs/Calvin.png";
+import image11 from "@/app/imgs/image11.png";
+import image12 from "@/app/imgs/image12.png";
+import image13 from "@/app/imgs/image13.png";
+import image14 from "@/app/imgs/image14.png";
+
 import Cards from "./Card/Cards";
 
 // const data = {
@@ -81,16 +91,11 @@ const Hero = (props: any) => {
         </div>
       </div>
       <div className="bg-black w-full h-24 flex justify-around items-center">
-        <Image src="/app/imgs/Group.png" alt="Group" width={100} height={50} />
-        <Image src="/app/imgs/Zara.png" alt="Zara" width={100} height={50} />
-        <Image src="/app/imgs/gucci.png" alt="Gucci" width={100} height={50} />
-        <Image src="/app/imgs/prada.png" alt="Prada" width={100} height={50} />
-        <Image
-          src="/app/imgs/Calvin.png"
-          alt="Calvin"
-          width={100}
-          height={50}
-        />
+        <Image src={group} alt="Group" width={100} height={50} />
+        <Image src={zara} alt="Zara" width={100} height={50} />
+        <Image src={gucci} alt="Gucci" width={100} height={50} />
+        <Image src={prada} alt="Prada" width={100} height={50} />
+        <Image src={calvin} alt="Calvin" width={100} height={50} />
       </div>
       {Data == null ? (
         <div className="flex justify-center items-center h-[80vh]">
@@ -118,7 +123,7 @@ const Hero = (props: any) => {
                   Casual
                 </h1>
                 <Image
-                  src="/imgs/Cloth-img/image11.png"
+                  src={image11}
                   alt="Casual"
                   width={480}
                   height={300}
@@ -132,7 +137,7 @@ const Hero = (props: any) => {
                   Formal
                 </h1>
                 <Image
-                  src="/imgs/Cloth-img/image13.png"
+                  src={image13}
                   alt="Formal"
                   width={480}
                   height={300}
@@ -148,7 +153,7 @@ const Hero = (props: any) => {
                   Party
                 </h1>
                 <Image
-                  src="/imgs/Cloth-img/image12.png"
+                  src={image12}
                   alt="Party"
                   width={480}
                   height={300}
@@ -162,7 +167,7 @@ const Hero = (props: any) => {
                   Gym
                 </h1>
                 <Image
-                  src="/imgs/Cloth-img/image14.png"
+                  src={image14}
                   alt="Gym"
                   width={480}
                   height={300}
