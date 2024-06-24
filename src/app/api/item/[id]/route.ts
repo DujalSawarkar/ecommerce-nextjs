@@ -5,10 +5,11 @@ import Product from "@/models/productModel";
 // Ensure the database is connected
 connect();
 
-export async function GET(req: NextRequest, res: NextResponse) {
-  const { searchParams } = new URL(req.url);
-  const id = searchParams.get("id");
-  console.log("id is here hhhhhhhh", id);
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const { id } = params;
 
   if (!id) {
     return NextResponse.json({
@@ -19,6 +20,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
   try {
     const product = await Product.findById(id);
+    console.log(product);
     if (!product) {
       return NextResponse.json({
         message: "Item not found",

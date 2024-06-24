@@ -9,7 +9,7 @@ import RatingReview from "@/app/(components)/items/RatingReview";
 import Faq from "@/app/(components)/items/Faq";
 import ProductInfo from "@/app/(components)/items/ProductInfo";
 import { useParams } from "next/navigation";
-import axios from "axios";
+// import axios from "axios";
 
 interface ItemProps {
   initialData?: any;
@@ -21,23 +21,20 @@ const Item: React.FC<ItemProps> = () => {
 
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/item/${id}`);
+      const result = await response.json();
+      console.log(result.data);
 
+      setData(result.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+    setLoading(false);
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get(`/api/items/${id}`);
-        const result = await response;
-        console.log(result);
-
-        setData(result);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchData();
   }, [id]);
 
@@ -75,10 +72,10 @@ const Item: React.FC<ItemProps> = () => {
       <div className="w-full mx-auto flex px-4 pb-6 mb-4">
         <div className="h-[75vh] w-3/4 flex">
           <div className="w-3/10">
-            {data.imageUrls.map((url: string, index: number) => (
+            {color.map((index: any) => (
               <div key={index} className="mb-4 mr-4">
                 <Image
-                  src={url}
+                  src={data.imageUrl}
                   alt=""
                   width={500}
                   height={500}
