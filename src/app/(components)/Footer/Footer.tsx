@@ -6,6 +6,11 @@ import { IoLogoTwitter } from "react-icons/io";
 import { LuFacebook } from "react-icons/lu";
 import { RiInstagramLine } from "react-icons/ri";
 import { FaGithub } from "react-icons/fa";
+import visa from "@/app/imgs/PaymentImg/visa.png";
+import ApplePay from "@/app/imgs/PaymentImg/ApplePay.png";
+import Gpay from "@/app/imgs/PaymentImg/GPay.png";
+import Badge from "@/app/imgs/PaymentImg/Badge.png";
+import Paypal from "@/app/imgs/PaymentImg/Paypal.png";
 
 const Footer = () => {
   const FooterData = [
@@ -105,7 +110,7 @@ const Footer = () => {
           <div className="flex items-center">
             <div>
               <Image
-                src="/imgs/PaymentImg/visa.png"
+                src={visa}
                 alt="Visa"
                 width={50}
                 height={30}
@@ -114,7 +119,7 @@ const Footer = () => {
             </div>
             <div>
               <Image
-                src="/imgs/PaymentImg/ApplePay.png"
+                src={ApplePay}
                 alt="Apple Pay"
                 width={50}
                 height={30}
@@ -123,7 +128,7 @@ const Footer = () => {
             </div>
             <div>
               <Image
-                src="/imgs/PaymentImg/GPay.png"
+                src={Gpay}
                 alt="Google Pay"
                 width={50}
                 height={30}
@@ -132,7 +137,7 @@ const Footer = () => {
             </div>
             <div>
               <Image
-                src="/imgs/PaymentImg/Badge.png"
+                src={Badge}
                 alt="Badge"
                 width={50}
                 height={30}
@@ -141,7 +146,7 @@ const Footer = () => {
             </div>
             <div>
               <Image
-                src="/imgs/PaymentImg/Paypal.png"
+                src={Paypal}
                 alt="Paypal"
                 width={50}
                 height={30}

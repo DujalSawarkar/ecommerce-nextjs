@@ -9,6 +9,7 @@ const nextConfig = {
       "www.istockphoto.com",
       "www.alamy.com",
       "res.cloudinary.com",
+      "shop.navi.gg",
     ], // Replace with your list of external domains
   },
 };

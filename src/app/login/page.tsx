@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { Button } from "@/components/ui/button";
 
 const LoginPage = () => {
   const Router = useRouter();
@@ -35,8 +36,8 @@ const LoginPage = () => {
     }
   }, [formData]);
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 bg-white shadow-md rounded-md">
+    <div className="flex flex-col items-center justify-center min-h-screen ">
+      <div className="w-full h-[60vh] max-w-md p-8 bg-gray-100 shadow-md rounded-md ">
         <h1 className="mb-6 text-2xl font-bold text-center text-black">
           Login Form
         </h1>
@@ -79,12 +80,12 @@ const LoginPage = () => {
           />
         </div>
 
-        <button
+        <Button
           onClick={onLogin}
-          className="w-full px-4 py-2 mb-4 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 mb-4 text-white  rounded-md  focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           {buttonDisable ? "Can't log in" : "Log in "}
-        </button>
+        </Button>
 
         <div className="text-center">
           <Link

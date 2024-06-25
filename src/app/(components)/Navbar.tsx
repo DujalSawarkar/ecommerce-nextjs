@@ -1,11 +1,30 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+
 import { FaShoppingCart } from "react-icons/fa";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import { RiSearchLine, RiArrowDropDownLine } from "react-icons/ri";
+import Cookies from "js-cookie";
 import shopco from "@/app/imgs/SHOP.CO.png";
+
 const Navbar = () => {
+  const router = useRouter();
+
+  const handleCartClick = () => {
+    const token = Cookies.get("token");
+    console.log(token);
+
+    if (!token) {
+      router.push("/login");
+    } else {
+      router.push("/cart");
+    }
+  };
+
   return (
     <>
       <div className="flex justify-around items-center p-4 bg-white h-[11vh]">
@@ -59,9 +78,12 @@ const Navbar = () => {
           </div>
         </div>
         <div className="flex justify-around items-center w-[13%] mt-2.5">
-          <Link href="/cart" className="text-black ml-2.5 text-2xl">
+          <button
+            onClick={handleCartClick}
+            className="text-black ml-2.5 text-2xl"
+          >
             <FaShoppingCart />
-          </Link>
+          </button>
           <Link href="/login" className="text-black ml-2.5 text-2xl">
             <HiOutlineUserCircle />
           </Link>
