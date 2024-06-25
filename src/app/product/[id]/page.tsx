@@ -9,6 +9,8 @@ import Faq from "@/app/(components)/items/Faq";
 import ProductInfo from "@/app/(components)/items/ProductInfo";
 import { useParams } from "next/navigation";
 import Card from "@/app/(components)/Card/Card";
+import Loader from "@/app/(components)/Loader/Loader";
+import { Button } from "@/components/ui/button";
 
 // interface ItemProps {
 //   initialData?: any;
@@ -36,7 +38,11 @@ const Item = () => {
   }, [id]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="h-[80vh] w-[95vw] flex justify-center items-center">
+        <Loader />
+      </div>
+    );
   }
 
   if (!data) {
@@ -66,7 +72,7 @@ const Item = () => {
 
   return (
     <div>
-      <div className="w-full mx-auto flex px-4 pb-6 mb-4">
+      <div className="w-full mx-auto flex p-4 pb-6 mb-4">
         <div className="h-[75vh] w-3/4 flex">
           <div className="w-3/10">
             {color.map((colorOption, index) => (
@@ -143,8 +149,8 @@ const Item = () => {
             {sizeOptions.map((size, index) => (
               <button
                 key={index}
-                className={`flex justify-center items-center py-2 px-4 rounded-full bg-gray-200 text-base font-normal text-gray-600 transition w-28 h-12 mb-4 ${
-                  size.isActive ? "bg-black text-white" : ""
+                className={`flex justify-center items-center py-2 px-4 rounded-full  text-base font-normal text-gray-600 transition w-28 h-12 mb-4 ${
+                  size.isActive ? "bg-black text-white" : "bg-gray-200"
                 }`}
               >
                 {size.name}
@@ -153,14 +159,14 @@ const Item = () => {
           </div>
           <hr className="border-gray-200 py-2" />
           <div className="flex gap-8">
-            <div className="flex w-44 h-13 p-4 rounded-full justify-between items-center bg-gray-200 text-lg">
+            <div className="flex w-44 h-12 p-4 rounded-full justify-between items-center bg-gray-200 text-lg">
               <button className="text-4xl">-</button>
               <p>0</p>
               <button className="text-4xl">+</button>
             </div>
-            <button className="w-100 h-13 p-4 rounded-full bg-black text-white">
+            <Button className="w-100 h-12 p-4 rounded-full bg-black text-white">
               Add to Cart
-            </button>
+            </Button>
           </div>
         </div>
       </div>

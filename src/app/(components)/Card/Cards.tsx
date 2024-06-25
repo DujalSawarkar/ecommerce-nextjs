@@ -12,8 +12,6 @@ interface DataType {
 const Cards: React.FC<{ head: string; data: any }> = ({ head, data }) => {
   const [view, setView] = useState(false);
   const slicedata = data.slice(0, 4);
-  // console.log(head);
-  // console.log(data);
 
   return (
     <div className="flex flex-col items-center justify-center m-16 transition duration-800 ease-in-out">

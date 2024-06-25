@@ -15,7 +15,7 @@ const Navbar = () => {
   const router = useRouter();
 
   const handleCartClick = () => {
-    const token = Cookies.get("token");
+    const token = Cookies.get("__session");
     console.log(token);
 
     if (!token) {
@@ -26,71 +26,63 @@ const Navbar = () => {
   };
 
   return (
-    <>
-      <div className="flex justify-around items-center p-4 bg-white h-[11vh]">
+    <div className="bg-white shadow-sm">
+      <div className=" mx-auto flex items-center p-2 justify-between h-[11vh]">
         <div className="flex-shrink-0 pl-5">
           <Link href="/">
             <Image src={shopco} alt="Your Logo" width={208} height={52} />
           </Link>
         </div>
-        <div className="flex justify-center items-center w-[80%] mx-6">
-          <div className="flex justify-center items-center gap-4">
-            <div>
-              <Link
-                href="/category"
-                className="flex justify-center items-center text-black text-xl p-2 hover:border-b-2 border-gray-300"
-              >
-                Shop <RiArrowDropDownLine />
-              </Link>
-            </div>
-            <div>
-              <Link
-                href="/category"
-                className="text-black text-xl p-2 hover:border-b-2 border-gray-300"
-              >
-                On Sales
-              </Link>
-            </div>
-            <div>
-              <Link
-                href="/category"
-                className="text-black text-xl p-2 hover:border-b-2 border-gray-300"
-              >
-                New Arrivals
-              </Link>
-            </div>
-            <div>
-              <Link
-                href="/category"
-                className="text-black text-xl p-2 hover:border-b-2 border-gray-300"
-              >
-                Brands
-              </Link>
-            </div>
+        <div className="flex-1 flex justify-center items-center mx-6">
+          <div className="flex space-x-6">
+            <Link
+              href="/category"
+              className="flex items-center text-gray-900 text-lg font-medium hover:text-gray-600"
+            >
+              Shop <RiArrowDropDownLine className="ml-1" />
+            </Link>
+            <Link
+              href="/category"
+              className="text-gray-900 text-lg font-medium hover:text-gray-600"
+            >
+              On Sales
+            </Link>
+            <Link
+              href="/category"
+              className="text-gray-900 text-lg font-medium hover:text-gray-600"
+            >
+              New Arrivals
+            </Link>
+            <Link
+              href="/category"
+              className="text-gray-900 text-lg font-medium hover:text-gray-600"
+            >
+              Brands
+            </Link>
           </div>
           <div className="relative flex-1 mx-4">
             <input
-              className="w-full h-12 text-gray-400 bg-gray-200 rounded-full pl-12"
+              className="w-full h-12 bg-gray-100 rounded-full pl-12 pr-4 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-300"
               type="text"
               placeholder="Search for products..."
             />
-            <RiSearchLine className="absolute top-4 left-4" />
+            <RiSearchLine className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-500" />
           </div>
         </div>
-        <div className="flex justify-around items-center w-[13%] mt-2.5">
+        <div className="flex items-center space-x-6">
           <button
             onClick={handleCartClick}
-            className="text-black ml-2.5 text-2xl"
+            className="text-gray-900 text-2xl hover:text-gray-600"
           >
             <FaShoppingCart />
           </button>
-          <Link href="/login" className="text-black ml-2.5 text-2xl">
+          <Link href="/login" className="text-gray-900 text-2xl hover:text-gray-600">
             <HiOutlineUserCircle />
           </Link>
         </div>
       </div>
-      <hr />
-    </>
+      <hr className="border-gray-200" />
+    </div>
   );
 };
 

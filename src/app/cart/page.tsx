@@ -1,8 +1,8 @@
 import React from "react";
-// import RouteCard from "../components/routeCard/routeCard";
 import { FiTag } from "react-icons/fi";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 const Cart = () => {
   // Dummy cart data
@@ -21,6 +21,13 @@ const Cart = () => {
       price: 80.0,
       discount: 70.0,
     },
+    {
+      _id: 2,
+      title: "Stylish Denim Jacket",
+      imageUrl: "/imgs/jacket1.png",
+      price: 80.0,
+      discount: 70.0,
+    },
   ].map((item) => ({
     ...item,
     dstprice: item.discount || 0,
@@ -28,97 +35,97 @@ const Cart = () => {
     showprice: item.discount || item.price || 0,
   }));
 
-  //   const actprice = Cart.reduce((accumulator, currentValue) => accumulator + currentValue.price, 0);
-  //   const dstprice = Cart.reduce((accumulator, currentValue) => accumulator + currentValue.discount, 0);
-  //   const showprice = dstprice;
-
   return (
-    <div>
-      {/* <RouteCard /> */}
-      <h1 className="text-4xl font-bold leading-12 uppercase ml-4 mb-4">
-        Your cart
-      </h1>
-      <div className="w-11/12 mx-auto flex gap-4">
-        <div className="w-2/3 border border-gray-200 rounded-xl">
-          {Cart.length === 0 ? (
-            <div className="loader-div">
-              <div className="loader"></div>
-            </div>
-          ) : (
-            Cart.map((e) => (
-              <div className="cart-product flex items-center" key={e._id}>
-                <Image
-                  src={e.imageUrl}
-                  alt=""
-                  width={100}
-                  height={100}
-                  className="rounded-md"
-                />
-                <RiDeleteBin5Fill className="delete ml-4 text-red-500 cursor-pointer" />
-                <div className="ml-4">
-                  <div className="productr-title">
-                    <h2 className="text-lg font-semibold">{e.title}</h2>
+    <div className="bg-white min-h-screen py-8">
+      <div className=" mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 className="text-4xl font-bold leading-10 uppercase text-gray-900 mb-8">
+          Your Cart
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="md:col-span-2 space-y-8 bg-gray-100 border border-gray-300 rounded-xl p-4">
+            {Cart.length === 0 ? (
+              <div className="flex justify-center items-center py-16">
+                <div className="loader"></div>
+              </div>
+            ) : (
+              Cart.map((item) => (
+                <div
+                  key={item._id}
+                  className="flex items-center bg-white border border-gray-300 rounded-xl px-4 py-3 shadow-sm"
+                >
+                  <div className="flex-shrink-0">
+                    <Image
+                      src={item.imageUrl}
+                      alt={item.title}
+                      width={100}
+                      height={100}
+                      className="rounded-md"
+                    />
                   </div>
-                  <div className="Size-text">
-                    <p className="text-base">Size :</p>
-                    <div></div>
-                  </div>
-                  <div>
-                    <p className="text-base">Color :</p>
-                    <div></div>
-                  </div>
-                  <div className="price-text">
-                    <p className="text-xl font-semibold">
-                      ${e.discount ? e.discount : e.price}
-                    </p>
-                  </div>
-                  <div className="product-btn-div-inner flex items-center mt-4">
-                    <button className="w-8 h-8 bg-gray-200 text-xl font-semibold">
-                      -
-                    </button>
-                    <p className="mx-2">1</p>
-                    <button className="w-8 h-8 bg-gray-200 text-xl font-semibold">
-                      +
-                    </button>
+                  <div className="ml-4 flex-grow">
+                    <div className="flex justify-between items-center mb-2">
+                      <h2 className="text-lg font-semibold text-gray-900">
+                        {item.title}
+                      </h2>
+                      <RiDeleteBin5Fill className="text-red-500 cursor-pointer" />
+                    </div>
+                    <div className="text-sm text-gray-600 mb-2">Size: M</div>
+                    <div className="text-sm text-gray-600 mb-2">
+                      Color: Blue
+                    </div>
+                    <div className="flex items-center">
+                      <p className="text-xl font-semibold text-gray-900 mr-2">
+                        ${item.discount ? item.discount : item.price}
+                      </p>
+                      <div className="flex items-center space-x-2">
+                        <Button className="w-8 h-8 bg-gray-300 text-xl font-semibold leading-none">
+                          -
+                        </Button>
+                        <span className="text-base">1</span>
+                        <Button className="w-8 h-8 bg-gray-300 text-xl font-semibold leading-none">
+                          +
+                        </Button>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
-          )}
-        </div>
-        <div className="w-1/3 border border-gray-200 rounded-xl p-4">
-          <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
-          <div className="order-summery">
-            <p className="text-base">Subtotal</p>
-            <h3 className="text-base font-semibold">${Cart[0].actprice}</h3>
+              ))
+            )}
           </div>
-          <div className="order-summery">
-            <p className="text-base">Discount </p>
-            <h4 className="text-base font-semibold">-${Cart[0].dstprice}</h4>
+          <div className="bg-gray-100 border border-gray-300 rounded-xl p-4 h-fit">
+            <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+            <div className="flex justify-between mb-2">
+              <p className="text-base text-gray-600">Subtotal</p>
+              <h3 className="text-base font-semibold">${Cart[0].actprice}</h3>
+            </div>
+            <div className="flex justify-between mb-2">
+              <p className="text-base text-gray-600">Discount</p>
+              <h4 className="text-base font-semibold">-${Cart[0].dstprice}</h4>
+            </div>
+            <div className="flex justify-between mb-2">
+              <p className="text-base text-gray-600">Delivery Fee</p>
+              <h3 className="text-base font-semibold">$15</h3>
+            </div>
+            <hr className="my-4 border-t border-gray-300" />
+            <div className="flex justify-between mb-4">
+              <p className="text-base text-gray-600">Total</p>
+              <h3 className="text-base font-semibold">${Cart[0].showprice}</h3>
+            </div>
+            <div className="flex items-center mb-4">
+              <FiTag className="text-base text-gray-600 mr-2" />
+              <input
+                type="text"
+                placeholder="Add promo code"
+                className="w-52 h-12 px-4 border border-gray-300 rounded-full text-base text-gray-600"
+              />
+              <Button className="w-24 h-12 px-4 bg-black text-white font-semibold ml-2">
+                Apply
+              </Button>
+            </div>
+            <Button className="w-full h-12 rounded-full bg-black text-white font-semibold">
+              Go to Checkout
+            </Button>
           </div>
-          <div className="order-summery">
-            <p className="text-base">Delivery Fee</p>
-            <h3 className="text-base font-semibold">$15</h3>
-          </div>
-          <hr className="my-4 border-t border-gray-200" />
-          <div className="order-summery">
-            <p className="text-base">Total</p>
-            <h3 className="text-base font-semibold">${Cart[0].showprice}</h3>
-          </div>
-          <div className="order-summery flex items-center my-4">
-            <FiTag className="tag mr-2" />
-            <input
-              type="text"
-              placeholder="Add promo code"
-              className="w-52 h-12 px-4 border border-gray-300 rounded-full text-base"
-            />
-            <button className="w-24 h-12 px-4 bg-black text-white font-semibold">
-              Apply
-            </button>
-          </div>
-          <button className="Check-btn w-full h-14 rounded-full bg-black text-white">
-            Go to Checkout{" "}
-          </button>
         </div>
       </div>
     </div>
