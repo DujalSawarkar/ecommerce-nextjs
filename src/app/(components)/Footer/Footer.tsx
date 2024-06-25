@@ -7,7 +7,7 @@ import { LuFacebook } from "react-icons/lu";
 import { RiInstagramLine } from "react-icons/ri";
 import { FaGithub } from "react-icons/fa";
 import visa from "@/app/imgs/PaymentImg/visa.png";
-import ApplePay from "@/app/imgs/PaymentImg/ApplePay.png";
+import ApplePay from "@/app/imgs/PaymentImg/Applepay.png";
 import Gpay from "@/app/imgs/PaymentImg/GPay.png";
 import Badge from "@/app/imgs/PaymentImg/Badge.png";
 import Paypal from "@/app/imgs/PaymentImg/Paypal.png";
