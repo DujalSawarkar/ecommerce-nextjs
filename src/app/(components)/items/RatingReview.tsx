@@ -2,6 +2,19 @@ import React from "react";
 import { HiOutlineAdjustmentsVertical } from "react-icons/hi2";
 import { RiArrowDownSLine } from "react-icons/ri";
 import Comment from "../Comments";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 const Data2 = [
   {
     id: 1,
@@ -61,15 +74,61 @@ const RatingReview = () => {
           <p className="ml-2 text-base text-gray-600 mt-1">(451)</p>
         </div>
         <div className="flex items-center gap-4">
-          <div className="flex justify-center items-center h-12 w-12 rounded-full bg-gray-200">
+          <Button className="flex justify-center items-center h-10 w-12 rounded-full  bg-gray-200 text-black hover:text-white hover:bg-black">
             <HiOutlineAdjustmentsVertical className="text-xl" />
-          </div>
-          <button className="flex items-center justify-between bg-gray-200 w-30 h-12 px-5 rounded-full">
+          </Button>
+          {/* <Button className="flex items-center justify-between bg-gray-200  text-black hover:text-white hover:bg-black">
             Latest <RiArrowDownSLine className="ml-2" />
-          </button>
-          <button className="w-42 h-12 px-8 bg-black text-white rounded-full">
-            Write a Review
-          </button>
+          </Button> */}
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button
+                variant="outline"
+                className="bg-gray-200  text-black hover:text-white hover:bg-black"
+              >
+                Add Review
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Add Your Review</DialogTitle>
+                {/* <DialogDescription>
+                  Make changes to your profile here. Click save when you're
+                  done.
+                </DialogDescription> */}
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="name" className="text-right">
+                    Name
+                  </Label>
+                  <Input
+                    id="name"
+                    placeholder="your name"
+                    className="col-span-3"
+                  />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="username" className="text-right">
+                    Comment
+                  </Label>
+                  <Textarea
+                    id="username"
+                    placeholder="Type your message here."
+                    className="col-span-3"
+                  />
+                </div>
+              </div>
+              <DialogFooter>
+                <Button
+                  type="submit"
+                  className="bg-gray-200  text-black hover:text-white hover:bg-black"
+                >
+                  Save changes
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
       <div className="flex justify-center items-center flex-wrap gap-8">

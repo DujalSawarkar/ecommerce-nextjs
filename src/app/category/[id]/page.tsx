@@ -8,6 +8,14 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import { useParams, useRouter } from "next/navigation";
 import Loader from "@/app/(components)/Loader/Loader";
 import Card from "@/app/(components)/Card/Card";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 const Category = () => {
   const router = useRouter();
@@ -66,6 +74,37 @@ const Category = () => {
 
   return (
     <div>
+      <div className="w-full ml-16 mt-5 ">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            {/* <BreadcrumbItem>
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1">
+                <BreadcrumbEllipsis className="h-4 w-4" />
+                <span className="sr-only">Toggle menu</span>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                <DropdownMenuItem>Documentation</DropdownMenuItem>
+                <DropdownMenuItem>Themes</DropdownMenuItem>
+                <DropdownMenuItem>GitHub</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </BreadcrumbItem> */}
+            {/* <BreadcrumbSeparator /> */}
+            <BreadcrumbItem>
+              <BreadcrumbLink href='/category/formals'>Category</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{id}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
       <div className="w-[95%] flex gap-[2rem] mx-auto categoryBody mt-10 mb-10">
         <div
           className={

@@ -12,13 +12,10 @@ import Card from "@/app/(components)/Card/Card";
 import Loader from "@/app/(components)/Loader/Loader";
 import { Button } from "@/components/ui/button";
 
-// interface ItemProps {
-//   initialData?: any;
-// }
-
 const Item = () => {
   const { id } = useParams();
   const [data, setData] = useState<any>(null);
+  const [relatedItems, setRelatedItems] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   const fetchData = async () => {
@@ -26,7 +23,13 @@ const Item = () => {
     try {
       const response = await fetch(`/api/item/${id}`);
       const result = await response.json();
-      setData(result.data); // Ensure you're accessing the correct part of the response
+      setData(result.data);
+
+      // Fetch related items based on the category
+      const category = result.data.category; // Ensure category is the correct field
+      const relatedResponse = await fetch(`/api/category/${category}`);
+      const relatedResult = await relatedResponse.json();
+      setRelatedItems(relatedResult.data); // Ensure you're accessing the correct part of the response
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -194,10 +197,9 @@ const Item = () => {
           You might also like
         </h1>
         <div className="w-full flex flex-wrap gap-6">
-          {/* <Cards head="You might also like" /> */}
-          {/* {data.relatedItems?.map((item: any, index: number) => (
+          {relatedItems.map((item, index) => (
             <Card key={index} data={item} />
-          ))} */}
+          ))}
         </div>
       </div>
     </div>

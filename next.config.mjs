@@ -10,6 +10,8 @@ const nextConfig = {
       "www.alamy.com",
       "res.cloudinary.com",
       "shop.navi.gg",
+      "w7.pngwing.com",
+      "w7.pngwing.com",
     ], // Replace with your list of external domains
   },
 };
