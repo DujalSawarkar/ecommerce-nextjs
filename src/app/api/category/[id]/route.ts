@@ -20,13 +20,16 @@ export async function GET(
   }
 
   try {
-    const products = await Product.find({ category: id });
+    const products = await Product.find({
+      $or: [{ category: id }, { item_type: id }],
+    });
     if (!products || products.length === 0) {
       return NextResponse.json({
         message: "No products found for the given category",
         status: 404,
       });
     }
+    console.log(products);
     return NextResponse.json({
       data: products,
       status: 200,

@@ -5,10 +5,16 @@ import React, { useEffect, useState } from "react";
 import { HiOutlineAdjustmentsVertical } from "react-icons/hi2";
 import axios from "axios";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Loader from "@/app/(components)/Loader/Loader";
+import Card from "@/app/(components)/Card/Card";
 
 const Category = () => {
+  const router = useRouter();
+
+  const navigateToCategory = (category: string) => {
+    router.push(`/category/${category}`);
+  };
   const [catData, setCatData] = useState([]);
   const cloths = ["T-Shirt", "shorts", "shirt", "hoodie", "jeans"];
   const color = [
@@ -23,17 +29,7 @@ const Category = () => {
     "bg-black",
     "bg-white",
   ];
-  const sizes = [
-    "XX-Small",
-    "X-Small",
-    "Small",
-    "Medium",
-    "Large",
-    "X-Large",
-    "XX-Large",
-    "3X-Large",
-    "4X-Large",
-  ];
+  const sizes = ["Small", "Medium", "Large", "X-Large"];
 
   const dressStyle = ["casuals", "formals", "party", "gym"];
 
@@ -52,15 +48,15 @@ const Category = () => {
   const fetchProductsByCategory = async (category: string) => {
     try {
       const data = await axios.get(`/api/category/${id}`);
-      console.log(data.data);
-      setCatData(data.data); // Ensure the response structure matches this
+      console.log(data.data.data);
+      setCatData(data.data.data); // Ensure the response structure matches this
     } catch (error) {
       console.error("Error fetching products:", error);
     }
   };
 
   useEffect(() => {
-    if (id && dressStyle.includes(id)) {
+    if (id) {
       fetchProductsByCategory(id);
     } else {
       // Handle invalid categoryId, e.g., redirect to home or show an error
@@ -97,7 +93,10 @@ const Category = () => {
                     <h1 className="text-lg font-normal text-left text-gray-600">
                       {e}
                     </h1>
-                    <IoIosArrowForward className="transition-transform duration-200 hover:cursor-pointer hover:bg-gray-100 hover:rounded-full" />
+                    <IoIosArrowForward
+                      className="transition-transform duration-200 hover:cursor-pointer hover:bg-gray-100 hover:rounded-full"
+                      onClick={() => navigateToCategory(e)}
+                    />
                   </div>
                 ))}
               </div>
@@ -185,7 +184,7 @@ const Category = () => {
                       </h1>
                       <IoIosArrowForward
                         className="transition-transform duration-200 hover:cursor-pointer hover:bg-gray-100 hover:rounded-full"
-                        onClick={() => fetchProductsByCategory(style)}
+                        onClick={() => navigateToCategory(style)}
                       />
                     </div>
                   ))}
@@ -203,20 +202,18 @@ const Category = () => {
               <RiArrowDropDownLine />
             </div>
           </div>
-          <div className="category-card-div flex flex-wrap gap-[3rem] mx-auto">
-            {catData.length === 0 ? (
+
+          {catData.length === 0 ? (
+            <div className="mt-[25%] ml-[50%]">
               <Loader />
-            ) : (
-              <>
-                {/* {catData.map((item: any) => (
-                  <div key={item._id}>
-                    
-                    <h1>{item.title}</h1>
-                  </div>
-                ))} */}
-              </>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div className=" flex flex-wrap gap-[3rem] ">
+              {catData.map((item: any) => (
+                <Card data={item} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
