@@ -14,6 +14,7 @@ const Cards: React.FC<{ head: string; data: any }> = ({ head, data }) => {
   const slicedata = data.slice(0, 4);
 
   return (
+    
     <div className="flex flex-col items-center justify-center m-16 transition duration-800 ease-in-out">
       <h1 className="text-4xl font-extrabold leading-tight text-center">
         {head}

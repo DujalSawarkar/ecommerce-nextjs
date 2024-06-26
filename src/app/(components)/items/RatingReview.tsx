@@ -1,7 +1,57 @@
 import React from "react";
 import { HiOutlineAdjustmentsVertical } from "react-icons/hi2";
 import { RiArrowDownSLine } from "react-icons/ri";
-
+import Comment from "../Comments";
+const Data2 = [
+  {
+    id: 1,
+    rayte: 4,
+    name: "Sarah M.",
+    discription:
+      "I'm blown away by the quality and style of the clothes I received from Shop.co. From casual wear to elegant dresses, every piece I've bought has exceeded my expectations.",
+    date: "August 17, 2023",
+  },
+  {
+    id: 2,
+    rayte: 4,
+    name: "Sarah M.",
+    discription:
+      "I'm blown away by the quality and style of the clothes I received from Shop.co. From casual wear to elegant dresses, every piece I've bought has exceeded my expectations.",
+    date: "August 17, 2023",
+  },
+  {
+    id: 3,
+    rayte: 4,
+    name: "Sarah M.",
+    discription:
+      "I'm blown away by the quality and style of the clothes I received from Shop.co. From casual wear to elegant dresses, every piece I've bought has exceeded my expectations.",
+    date: "August 17, 2023",
+  },
+  {
+    id: 4,
+    rayte: 4,
+    name: "Sarah M.",
+    discription:
+      "I'm blown away by the quality and style of the clothes I received from Shop.co. From casual wear to elegant dresses, every piece I've bought has exceeded my expectations.",
+    date: "August 17, 2023",
+  },
+  {
+    id: 5,
+    rayte: 4,
+    name: "Sarah M.",
+    discription:
+      "I'm blown away by the quality and style of the clothes I received from Shop.co. From casual wear to elegant dresses, every piece I've bought has exceeded my expectations.",
+    date: "August 17, 2023",
+  },
+  {
+    id: 6,
+    rayte: 4,
+    name: "Sarah M.",
+    discription:
+      "I'm blown away by the quality and style of the clothes I received from Shop.co. From casual wear to elegant dresses, every piece I've bought has exceeded my expectations.",
+    date: "August 17, 2023",
+  },
+];
 const RatingReview = () => {
   return (
     <div className="w-11/12 mx-auto">
@@ -23,10 +73,9 @@ const RatingReview = () => {
         </div>
       </div>
       <div className="flex justify-center items-center flex-wrap gap-8">
-        {/* {Data2.map((data) => (
-          // <Comment data={data} key={data.id} />
-          <div>comments</div>
-        ))} */}
+        {Data2.map((e: any, index) => (
+          <Comment data={e} key={index} />
+        ))}
       </div>
     </div>
   );

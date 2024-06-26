@@ -6,6 +6,7 @@ import { HiOutlineAdjustmentsVertical } from "react-icons/hi2";
 import axios from "axios";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { useParams } from "next/navigation";
+import Loader from "@/app/(components)/Loader/Loader";
 
 const Category = () => {
   const [catData, setCatData] = useState([]);
@@ -36,8 +37,8 @@ const Category = () => {
 
   const dressStyle = ["casuals", "formals", "party", "gym"];
 
-  const { categoryId } = useParams() as { categoryId: string };
-
+  const { id } = useParams() as { id: string };
+  console.log(id);
   const [filterHide, setFilterHide] = useState(true);
   const [price, setPrice] = useState(true);
   const [Color, setColor] = useState(true);
@@ -50,9 +51,8 @@ const Category = () => {
 
   const fetchProductsByCategory = async (category: string) => {
     try {
-      const { data } = await axios.get(`/api/products/category`, {
-        params: { category },
-      });
+      const data = await axios.get(`/api/category/${id}`);
+      console.log(data.data);
       setCatData(data.data); // Ensure the response structure matches this
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -60,13 +60,13 @@ const Category = () => {
   };
 
   useEffect(() => {
-    if (categoryId && dressStyle.includes(categoryId)) {
-      fetchProductsByCategory(categoryId);
+    if (id && dressStyle.includes(id)) {
+      fetchProductsByCategory(id);
     } else {
       // Handle invalid categoryId, e.g., redirect to home or show an error
-      console.warn(`Invalid category ID: ${categoryId}`);
+      console.warn(`Invalid category ID: ${id}`);
     }
-  }, [categoryId]);
+  }, [id]);
 
   return (
     <div>
@@ -196,9 +196,7 @@ const Category = () => {
         </div>
         <div className="category-main flex flex-col gap-[2rem]">
           <div className="w-[70vw] flex justify-between">
-            <h1 className="text-[32px] font-bold text-left capitalize">
-              {categoryId}
-            </h1>
+            <h1 className="text-[32px] font-bold text-left capitalize">{id}</h1>
             <div className="flex items-center sortFilter">
               <p> Sort by : </p>
               <h5> Most Popular</h5>
@@ -207,17 +205,15 @@ const Category = () => {
           </div>
           <div className="category-card-div flex flex-wrap gap-[3rem] mx-auto">
             {catData.length === 0 ? (
-              <center className="loader-main">
-                {/* <div className="loader"></div> */}
-              </center>
+              <Loader />
             ) : (
               <>
-                {catData.map((item: any) => (
+                {/* {catData.map((item: any) => (
                   <div key={item._id}>
-                    {/* Replace this with your Card component */}
+                    
                     <h1>{item.title}</h1>
                   </div>
-                ))}
+                ))} */}
               </>
             )}
           </div>
