@@ -45,11 +45,12 @@ export async function POST(request: NextRequest) {
     });
 
     const response = NextResponse.json({
+      token,
       message: " login succesfull",
       success: true,
     });
 
-    response.cookies.set("token", token, { httpOnly: true });
+    response.cookies.set("token", token);
 
     return response;
   } catch (error) {

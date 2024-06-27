@@ -15,7 +15,7 @@ const Navbar = () => {
   const router = useRouter();
 
   const handleCartClick = () => {
-    const token = Cookies.get("__session");
+    const token = Cookies.get("token");
     console.log(token);
 
     if (!token) {
@@ -76,7 +76,10 @@ const Navbar = () => {
           >
             <FaShoppingCart />
           </button>
-          <Link href="/login" className="text-gray-900 text-2xl hover:text-gray-600">
+          <Link
+            href="/login"
+            className="text-gray-900 text-2xl hover:text-gray-600"
+          >
             <HiOutlineUserCircle />
           </Link>
         </div>

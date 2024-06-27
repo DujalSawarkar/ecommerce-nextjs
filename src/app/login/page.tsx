@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
+import Cookies from "js-cookie";
 
 const LoginPage = () => {
   const Router = useRouter();
@@ -17,13 +18,14 @@ const LoginPage = () => {
 
   const onLogin = async () => {
     try {
-      console.log(formData);
+      // console.log(formData);
 
       setloading(true);
       const response = await axios.post("/api/users/login", formData);
-      console.log("login", response);
-
-      Router.push("/");
+      // console.log("login", response);
+      const token: string = response.data.token;
+      Cookies.set("token", token);
+      // Router.push("/");
     } catch (error) {
       console.log(error);
     }
