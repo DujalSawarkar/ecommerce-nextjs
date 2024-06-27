@@ -16,6 +16,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { Slider } from "@/components/ui/slider";
 
 const Category = () => {
   const router = useRouter();
@@ -96,7 +97,7 @@ const Category = () => {
           </BreadcrumbItem> */}
             {/* <BreadcrumbSeparator /> */}
             <BreadcrumbItem>
-              <BreadcrumbLink href='/category/formals'>Category</BreadcrumbLink>
+              <BreadcrumbLink href="/category/formals">Category</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
@@ -151,13 +152,15 @@ const Category = () => {
                   />
                 </div>
                 {/* Uncomment the following block if you have a price filter implemented */}
-                {/* {price && (
+                {price && (
                   <Slider
-                    className="Slider"
-                    getAriaLabel={() => "Temperature range"}
-                    valueLabelDisplay="auto"
+                    defaultValue={[50]}
+                    max={100}
+                    step={1}
+                    className="my-6"
+                    // {...props}
                   />
-                )} */}
+                )}
               </div>
               <hr className="my-[1rem]" />
               <div className="flex justify-between items-center w-[245px]">
