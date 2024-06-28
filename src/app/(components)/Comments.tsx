@@ -32,7 +32,7 @@ const Comment: React.FC<CommentProps> = ({ data }) => {
           <h2 className="text-lg font-bold mr-2">{data.name}</h2>
           <Image src={tick} alt="verified" width={20} height={20} />
         </div>
-        <p className="text-base text-gray-600 mb-4">{data.discription}</p>
+        <p className="text-base text-gray-600 mb-4">{data.discription.slice(0,130)}..</p>
         <div className="text-xs font-medium text-gray-500">{`Posted on ${data.date}`}</div>
       </div>
     </div>

@@ -26,8 +26,8 @@ const Item = () => {
       setData(result.data);
 
       // Fetch related items based on the category
-      const category = result.data.category; // Ensure category is the correct field
-      const relatedResponse = await fetch(`/api/category/${category}`);
+      const item = result.data.item_type; // Ensure category is the correct field
+      const relatedResponse = await fetch(`/api/category/${item}`);
       const relatedResult = await relatedResponse.json();
       setRelatedItems(relatedResult.data); // Ensure you're accessing the correct part of the response
     } catch (error) {
@@ -196,7 +196,7 @@ const Item = () => {
         <h1 className="text-4xl font-black mb-4 text-center uppercase">
           You might also like
         </h1>
-        <div className="w-full flex flex-wrap gap-6">
+        <div className="w-full flex justify-center flex-wrap gap-6">
           {relatedItems.map((item, index) => (
             <Card key={index} data={item} />
           ))}
