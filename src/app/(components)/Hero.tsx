@@ -22,6 +22,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Comment from "./Comments";
+// import { UserButton } from "@clerk/nextjs";
 
 const Hero = (props: any) => {
   const Data = props.data;
@@ -80,6 +81,7 @@ const Hero = (props: any) => {
 
   return (
     <div className="flex flex-col items-center">
+      {/* <UserButton /> */}
       <div className="relative w-full">
         <div className="relative h-[90vh] mb-[-7px]">
           <div className="relative h-[90vh]">
@@ -161,7 +163,7 @@ const Hero = (props: any) => {
       <div className="flex flex-col items-center bg-gray-200 border border-black w-4/5 mx-auto rounded-[50px] p-6 my-8">
         <p className="text-4xl font-extrabold mb-12">BROWSE BY DRESS STYLE</p>
         <div className="flex flex-wrap gap-4 md:gap-8 justify-center items-center mb-16">
-          <div>
+          <div className="">
             <div className="relative transition-transform transform hover:scale-105">
               <Link href="/category/casuals">
                 <h1 className="absolute top-4 left-4 text-2xl font-bold">
@@ -171,12 +173,12 @@ const Hero = (props: any) => {
                   src={image11}
                   alt="Casual"
                   width={480}
-                  height={300}
-                  className="rounded-[30px]"
+                  height={100}
+                  className="rounded-[30px] h-80"
                 />
               </Link>
             </div>
-            <div className="relative transition-transform transform hover:scale-105">
+            <div className="relative transition-transform transform hover:scale-105 mt-8">
               <Link href="/category/formals">
                 <h1 className="absolute top-4 left-4 text-2xl font-bold">
                   Formal
@@ -192,7 +194,7 @@ const Hero = (props: any) => {
             </div>
           </div>
           <div>
-            <div className="relative transition-transform transform hover:scale-105">
+            <div className="relative transition-transform transform hover:scale-105 mb-8">
               <Link href="/category/party">
                 <h1 className="absolute top-4 left-4 text-2xl font-bold">
                   Party
@@ -216,7 +218,7 @@ const Hero = (props: any) => {
                   alt="Gym"
                   width={480}
                   height={300}
-                  className="rounded-[30px]"
+                  className="rounded-[30px] h-80"
                 />
               </Link>
             </div>
@@ -230,10 +232,7 @@ const Hero = (props: any) => {
         <Carousel className="w-[100vw] max-w-7xl">
           <CarouselContent className="-ml-1">
             {Data2.map((e: any, index) => (
-              <CarouselItem
-                key={index}
-                
-              >
+              <CarouselItem key={index}>
                 <Comment data={e} />
               </CarouselItem>
             ))}
