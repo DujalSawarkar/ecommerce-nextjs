@@ -11,6 +11,10 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    item_type: {
+      type: String,
+      required: true,
+    },
     rate: {
       type: Number,
       required: true,

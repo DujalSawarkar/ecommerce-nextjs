@@ -1,10 +1,25 @@
 "use client";
-import { useState } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
+
+interface FormData {
+  id: string;
+  category: string;
+  item_type: string;
+  rate: string;
+  imageUrl: string;
+  title: string;
+  discount: string;
+  price: string;
+  discountPercent: string;
+  colors: string;
+  totalQuantityAvailable: string;
+}
 
 const ProductForm = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     id: "",
     category: "",
+    item_type: "",
     rate: "",
     imageUrl: "",
     title: "",
@@ -15,7 +30,7 @@ const ProductForm = () => {
     totalQuantityAvailable: "",
   });
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -23,7 +38,7 @@ const ProductForm = () => {
     });
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const colorsArray = formData.colors.split(",").map((color) => color.trim());
@@ -37,22 +52,28 @@ const ProductForm = () => {
       totalQuantityAvailable: parseInt(formData.totalQuantityAvailable, 10),
       colors: colorsArray,
     };
+    console.log("Data to send:", data);
 
-    const response = await fetch("/api/product", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    try {
+      const response = await fetch("/api/product", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-    if (response.ok) {
-      const product = await response.json();
-      console.log("Product created:", product);
-      // Reset form or show success message
-    } else {
-      const errorData = await response.json();
-      console.error("Error creating product:", errorData);
+      if (response.ok) {
+        const product = await response.json();
+        console.log("Product created:", product);
+        // Reset form or show success message
+      } else {
+        const errorData = await response.json();
+        console.error("Error creating product:", errorData);
+        // Show error message
+      }
+    } catch (error) {
+      console.error("Error creating product:", error);
       // Show error message
     }
   };
@@ -78,6 +99,17 @@ const ProductForm = () => {
             type="text"
             name="category"
             value={formData.category}
+            onChange={handleChange}
+            required
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700">Item Type:</label>
+          <input
+            type="text"
+            name="item_type"
+            value={formData.item_type}
             onChange={handleChange}
             required
             className="w-full px-3 py-2 border border-gray-300 rounded-lg"
