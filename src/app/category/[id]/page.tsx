@@ -75,7 +75,7 @@ const Category = () => {
 
   return (
     <div>
-      <div className="w-full ml-16 mt-5 ">
+      <div className="ml-16 mt-5 ">
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
