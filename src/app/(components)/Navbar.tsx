@@ -6,7 +6,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import { FaShoppingCart } from "react-icons/fa";
-import { HiOutlineUserCircle } from "react-icons/hi";
 import { RiSearchLine, RiArrowDropDownLine } from "react-icons/ri";
 import Cookies from "js-cookie";
 import shopco from "@/app/imgs/SHOP.CO.png";
@@ -70,17 +69,13 @@ const Navbar = () => {
 
           {/* <HiOutlineUserCircle /> */}
           <SignedOut>
-            <SignInButton
-              afterSignUpUrl="/learn"
-              afterSignInUrl="/learn"
-              mode="redirect"
-            >
+            <SignInButton afterSignUpUrl="/" afterSignInUrl="/" mode="redirect">
               <Button>Sign In</Button>
             </SignInButton>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
           </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
         </div>
       </div>
       <hr className="border-gray-200" />

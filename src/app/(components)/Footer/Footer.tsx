@@ -11,7 +11,7 @@ import ApplePay from "@/app/imgs/PaymentImg/Applepay.png";
 import Gpay from "@/app/imgs/PaymentImg/GPay.png";
 import Badge from "@/app/imgs/PaymentImg/Badge.png";
 import Paypal from "@/app/imgs/PaymentImg/Paypal.png";
-
+import shopco from "@/app/imgs/SHOP.CO.png";
 const Footer = () => {
   const FooterData = [
     {
@@ -68,12 +68,7 @@ const Footer = () => {
       <div>
         <div className="flex justify-evenly w-full h-2/5 pt-40 pb-4 bg-gray-100 gap-8">
           <div className="w-1/5">
-            <Image
-              src="/imgs/SHOP.CO.png"
-              alt="Your Logo"
-              width={100}
-              height={50}
-            />
+            <Image src={shopco} alt="Your Logo" width={100} height={50} />
             <br />
             <br />
             <p>
