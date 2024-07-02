@@ -10,20 +10,11 @@ import { HiOutlineUserCircle } from "react-icons/hi";
 import { RiSearchLine, RiArrowDropDownLine } from "react-icons/ri";
 import Cookies from "js-cookie";
 import shopco from "@/app/imgs/SHOP.CO.png";
+import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   const router = useRouter();
-
-  const handleCartClick = () => {
-    const token = Cookies.get("token");
-    console.log(token);
-
-    if (!token) {
-      router.push("/login");
-    } else {
-      router.push("/cart");
-    }
-  };
 
   return (
     <div className="bg-white shadow-sm">
@@ -70,18 +61,26 @@ const Navbar = () => {
           </div>
         </div>
         <div className="flex items-center space-x-6">
-          <button
-            onClick={handleCartClick}
+          <Link
+            href="/cart"
             className="text-gray-900 text-2xl hover:text-gray-600"
           >
             <FaShoppingCart />
-          </button>
-          <Link
-            href="/login"
-            className="text-gray-900 text-2xl hover:text-gray-600"
-          >
-            <HiOutlineUserCircle />
           </Link>
+
+          {/* <HiOutlineUserCircle /> */}
+          <SignedOut>
+            <SignInButton
+              afterSignUpUrl="/learn"
+              afterSignInUrl="/learn"
+              mode="redirect"
+            >
+              <Button>Sign In</Button>
+            </SignInButton>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </SignedOut>
         </div>
       </div>
       <hr className="border-gray-200" />
