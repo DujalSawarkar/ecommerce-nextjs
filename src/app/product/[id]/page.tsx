@@ -1,35 +1,38 @@
+// components/items/Item.tsx
 "use client";
-
 import React, { useState, useEffect } from "react";
-import star from "@/app/imgs/PaymentImg/Star.png";
-import { BsCheckLg } from "react-icons/bs";
 import Image from "next/image";
+import { BsCheckLg } from "react-icons/bs";
+import Card from "@/app/(components)/Card/Card";
+import Loader from "@/app/(components)/Loader/Loader";
+import { Button } from "@/components/ui/button";
+import star from "@/app/imgs/PaymentImg/Star.png";
 import RatingReview from "@/app/(components)/items/RatingReview";
 import Faq from "@/app/(components)/items/Faq";
 import ProductInfo from "@/app/(components)/items/ProductInfo";
 import { useParams } from "next/navigation";
-import Card from "@/app/(components)/Card/Card";
-import Loader from "@/app/(components)/Loader/Loader";
-import { Button } from "@/components/ui/button";
 
 const Item = () => {
-  const { id } = useParams();
+  // const router = useRouter();
+  const { id } = useParams(); // Assuming you use Next.js useRouter hook for getting id
   const [data, setData] = useState<any>(null);
   const [relatedItems, setRelatedItems] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
+  // Fetch data for the selected item and related items
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/item/${id}`);
+      const response = await fetch(`/api/item/${id}`); // Fetch item details
       const result = await response.json();
       setData(result.data);
 
-      // Fetch related items based on the category
-      const item = result.data.item_type; // Ensure category is the correct field
-      const relatedResponse = await fetch(`/api/category/${item}`);
+      // Fetch related items based on the category or other criteria
+      const relatedResponse = await fetch(
+        `/api/category/${result.data.item_type}`
+      ); // Adjust endpoint based on your API design
       const relatedResult = await relatedResponse.json();
-      setRelatedItems(relatedResult.data); // Ensure you're accessing the correct part of the response
+      setRelatedItems(relatedResult.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -37,9 +40,12 @@ const Item = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    if (id) {
+      fetchData();
+    }
   }, [id]);
 
+  // Loading state while fetching data
   if (loading) {
     return (
       <div className="h-[80vh] w-[95vw] flex justify-center items-center">
@@ -48,22 +54,29 @@ const Item = () => {
     );
   }
 
+  // If no data found for the given id
   if (!data) {
     return <div>No data found</div>;
   }
 
+  // Render stars based on rating
+  const divArray = Array(data.rate).fill(0);
+
+  // Options for product details navigation
   const ratingComp = [
     { name: "Product Details", isActive: false },
     { name: "Rating & Reviews", isActive: true },
     { name: "FAQs", isActive: false },
   ];
 
-  const color = [
+  // Color options for the product
+  const colorOptions = [
     { name: "bg-[#7b7bbd]", isActive: false },
     { name: "bg-[#bd7b7b]", isActive: true },
     { name: "bg-[#7bbd7e]", isActive: false },
   ];
 
+  // Size options for the product
   const sizeOptions = [
     { name: "Small", isActive: false },
     { name: "Medium", isActive: true },
@@ -71,17 +84,17 @@ const Item = () => {
     { name: "X-Large", isActive: false },
   ];
 
-  const divArray = Array(data.rate).fill(0);
-
   return (
     <div>
+      {/* Product Images and Basic Details */}
       <div className="w-full mx-auto flex p-4 pb-6 mb-4">
         <div className="h-[75vh] w-3/4 flex">
+          {/* Color options */}
           <div className="w-3/10">
-            {color.map((colorOption, index) => (
+            {colorOptions.map((colorOption, index) => (
               <div key={index} className="mb-4 mr-4">
                 <Image
-                  src={data.imageUrl}
+                  src={data.imageUrl} // Assuming imageUrl is part of data received from API
                   alt=""
                   width={500}
                   height={500}
@@ -90,9 +103,10 @@ const Item = () => {
               </div>
             ))}
           </div>
+          {/* Main product image */}
           <div className="w-7/10 flex justify-center items-center pr-4">
             <Image
-              src={data.imageUrl}
+              src={data.imageUrl} // Assuming imageUrl is part of data received from API
               alt=""
               width={500}
               height={500}
@@ -100,8 +114,10 @@ const Item = () => {
             />
           </div>
         </div>
+        {/* Product details and controls */}
         <div className="pl-4">
           <h1 className="text-4xl font-black mb-4">{data.title}</h1>
+          {/* Product rating */}
           <div className="flex items-center gap-1 mb-4">
             {divArray.map((_, index) => (
               <Image
@@ -115,6 +131,7 @@ const Item = () => {
             ))}
             <p className="text-lg font-normal">{`${data.rate}.0/5`}</p>
           </div>
+          {/* Product price and discount */}
           <div className="flex gap-8 mb-4">
             {data.discount ? (
               <>
@@ -128,14 +145,16 @@ const Item = () => {
               <h2 className="text-2xl font-bold">{`$${data.price}`}</h2>
             )}
           </div>
+          {/* Product description */}
           <p className="text-base font-normal text-gray-600 mb-4">
             This graphic t-shirt which is perfect for any occasion. Crafted from
             a soft and breathable fabric, it offers superior comfort and style.
           </p>
+          {/* Select colors */}
           <hr className="border-gray-200 py-2" />
           <p className="text-base font-normal text-gray-600">Select Colors</p>
           <div className="flex gap-4 my-4">
-            {color.map((c, index) => (
+            {colorOptions.map((c, index) => (
               <div
                 key={index}
                 className={`${c.name} border border-black rounded-full w-9 h-9 flex items-center justify-center`}
@@ -144,6 +163,7 @@ const Item = () => {
               </div>
             ))}
           </div>
+          {/* Select size */}
           <hr className="border-gray-200 py-2" />
           <p className="text-base font-normal text-gray-600 mb-4">
             Choose Size
@@ -160,11 +180,12 @@ const Item = () => {
               </button>
             ))}
           </div>
+          {/* Quantity selection and add to cart button */}
           <hr className="border-gray-200 py-2" />
           <div className="flex gap-8">
             <div className="flex w-44 h-12 p-4 rounded-full justify-between items-center bg-gray-200 text-lg">
               <button className="text-4xl">-</button>
-              <p>0</p>
+              <p>1</p>
               <button className="text-4xl">+</button>
             </div>
             <Button className="w-100 h-12 p-4 rounded-full bg-black text-white">
@@ -174,6 +195,7 @@ const Item = () => {
         </div>
       </div>
 
+      {/* Product details navigation */}
       <div className="flex flex-col justify-center items-center mt-20">
         <div className="w-9/12 flex justify-evenly items-center mb-4">
           {ratingComp.map((rate, index) => (
@@ -187,16 +209,19 @@ const Item = () => {
             </button>
           ))}
         </div>
+        {/* Conditionally render product information, rating & reviews, and FAQs */}
         <div>{ratingComp[0].isActive && <ProductInfo />}</div>
         <div>{ratingComp[1].isActive && <RatingReview />}</div>
         <div>{ratingComp[2].isActive && <Faq />}</div>
       </div>
 
+      {/* Related products */}
       <div className="flex flex-col justify-center items-center mt-20">
         <h1 className="text-4xl font-black mb-4 text-center uppercase">
           You might also like
         </h1>
         <div className="w-full flex justify-center flex-wrap gap-6">
+          {/* Render related products as cards */}
           {relatedItems.map((item, index) => (
             <Card key={index} data={item} />
           ))}
