@@ -11,13 +11,14 @@ import RatingReview from "@/app/(components)/items/RatingReview";
 import Faq from "@/app/(components)/items/Faq";
 import ProductInfo from "@/app/(components)/items/ProductInfo";
 import { useParams } from "next/navigation";
+import { useAuth } from "@clerk/nextjs"; // Import Clerk useAuth hook
 
 const Item = () => {
-  // const router = useRouter();
   const { id } = useParams(); // Assuming you use Next.js useRouter hook for getting id
   const [data, setData] = useState<any>(null);
   const [relatedItems, setRelatedItems] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const { userId } = useAuth(); // Get the userId from Clerk
 
   // Fetch data for the selected item and related items
   const fetchData = async () => {
@@ -37,6 +38,38 @@ const Item = () => {
       console.error("Error fetching data:", error);
     }
     setLoading(false);
+  };
+
+  const addToCart = async () => {
+    console.log(userId, data);
+
+    if (!userId) {
+      console.log("User is not authenticated");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: userId,
+            
+          item: data, // Assuming _id is the identifier for the item
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to add item to cart");
+      }
+
+      const result = await response.json();
+      console.log("Item added to cart:", result);
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    }
   };
 
   useEffect(() => {
@@ -188,7 +221,10 @@ const Item = () => {
               <p>1</p>
               <button className="text-4xl">+</button>
             </div>
-            <Button className="w-100 h-12 p-4 rounded-full bg-black text-white">
+            <Button
+              className="w-100 h-12 p-4 rounded-full bg-black text-white"
+              onClick={addToCart}
+            >
               Add to Cart
             </Button>
           </div>
