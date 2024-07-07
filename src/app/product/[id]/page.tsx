@@ -1,4 +1,3 @@
-// components/items/Item.tsx
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
@@ -19,6 +18,18 @@ const Item = () => {
   const [relatedItems, setRelatedItems] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const { userId } = useAuth(); // Get the userId from Clerk
+  const [quantity, setQuantity] = useState<number>(1); // Initialize quantity state
+  const [colorOptions, setColorOptions] = useState([
+    { name: "bg-yellow-500", isActive: false },
+    { name: "bg-rose-500", isActive: true },
+    { name: "bg-blue-500", isActive: false },
+  ]);
+  const [sizeOptions, setSizeOptions] = useState([
+    { name: "Small", isActive: false },
+    { name: "Medium", isActive: true },
+    { name: "Large", isActive: false },
+    { name: "X-Large", isActive: false },
+  ]);
 
   // Fetch data for the selected item and related items
   const fetchData = async () => {
@@ -41,14 +52,32 @@ const Item = () => {
   };
 
   const addToCart = async () => {
-    console.log(userId, data);
-
     if (!userId) {
       console.log("User is not authenticated");
       return;
     }
 
+    const selectedColor = colorOptions.find((c) => c.isActive)?.name || "";
+    const selectedSize = sizeOptions.find((s) => s.isActive)?.name || "";
+
+    const itemData = {
+      id: data._id, // Assuming _id is the identifier from your data
+      category: data.category,
+      item_type: data.item_type,
+      rate: data.rate,
+      imageUrl: data.imageUrl,
+      title: data.title,
+      discount: data.discount || 0, // Set discount to 0 if undefined
+      price: data.price,
+      discountPercent: data.discountPercent || 0, // Set discountPercent to 0 if undefined
+      colors: selectedColor, // Send the selected color
+      size: selectedSize, // Send the selected size
+      quantity, // Send the updated quantity
+    };
+
     try {
+      console.log("Adding item to cart:", itemData);
+
       const response = await fetch("/api/cart", {
         method: "POST",
         headers: {
@@ -56,8 +85,7 @@ const Item = () => {
         },
         body: JSON.stringify({
           userId: userId,
-            
-          item: data, // Assuming _id is the identifier for the item
+          item: itemData,
         }),
       });
 
@@ -72,6 +100,29 @@ const Item = () => {
     }
   };
 
+  const handleColorClick = (index: number) => {
+    setColorOptions((prevColors) =>
+      prevColors.map((color, i) => ({
+        ...color,
+        isActive: i === index,
+      }))
+    );
+  };
+
+  const handleSizeClick = (index: number) => {
+    setSizeOptions((prevSizes) =>
+      prevSizes.map((size, i) => ({
+        ...size,
+        isActive: i === index,
+      }))
+    );
+  };
+
+  const incrementQuantity = () => setQuantity((prev) => prev + 1);
+
+  const decrementQuantity = () =>
+    setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+
   useEffect(() => {
     if (id) {
       fetchData();
@@ -81,7 +132,7 @@ const Item = () => {
   // Loading state while fetching data
   if (loading) {
     return (
-      <div className="h-[80vh] w-[95vw] flex justify-center items-center">
+      <div className="h-[80vh] w-[95vw] flex justify-center items-center ">
         <Loader />
       </div>
     );
@@ -102,21 +153,6 @@ const Item = () => {
     { name: "FAQs", isActive: false },
   ];
 
-  // Color options for the product
-  const colorOptions = [
-    { name: "bg-[#7b7bbd]", isActive: false },
-    { name: "bg-[#bd7b7b]", isActive: true },
-    { name: "bg-[#7bbd7e]", isActive: false },
-  ];
-
-  // Size options for the product
-  const sizeOptions = [
-    { name: "Small", isActive: false },
-    { name: "Medium", isActive: true },
-    { name: "Large", isActive: false },
-    { name: "X-Large", isActive: false },
-  ];
-
   return (
     <div>
       {/* Product Images and Basic Details */}
@@ -125,7 +161,13 @@ const Item = () => {
           {/* Color options */}
           <div className="w-3/10">
             {colorOptions.map((colorOption, index) => (
-              <div key={index} className="mb-4 mr-4">
+              <div
+                key={index}
+                className={`mb-4 mr-4 cursor-pointer ${
+                  colorOption.isActive ? "ring-2 ring-black" : ""
+                }`}
+                onClick={() => handleColorClick(index)}
+              >
                 <Image
                   src={data.imageUrl} // Assuming imageUrl is part of data received from API
                   alt=""
@@ -133,6 +175,9 @@ const Item = () => {
                   height={500}
                   className="rounded-2xl h-[10.6rem] w-full"
                 />
+                {colorOption.isActive && (
+                  <BsCheckLg className="text-2xl absolute top-2 right-2 text-white" />
+                )}
               </div>
             ))}
           </div>
@@ -190,7 +235,12 @@ const Item = () => {
             {colorOptions.map((c, index) => (
               <div
                 key={index}
-                className={`${c.name} border border-black rounded-full w-9 h-9 flex items-center justify-center`}
+                className={`${
+                  c.name
+                } border border-black rounded-full w-9 h-9 flex items-center justify-center cursor-pointer ${
+                  c.isActive ? "ring-2 ring-black" : ""
+                }`}
+                onClick={() => handleColorClick(index)}
               >
                 {c.isActive && <BsCheckLg className="text-2xl" />}
               </div>
@@ -205,9 +255,10 @@ const Item = () => {
             {sizeOptions.map((size, index) => (
               <button
                 key={index}
-                className={`flex justify-center items-center py-2 px-4 rounded-full  text-base font-normal text-gray-600 transition w-28 h-12 mb-4 ${
+                className={`flex justify-center items-center py-2 px-4 rounded-full  text-base font-normal text-gray-600 transition w-28 h-12 mb-4 cursor-pointer ${
                   size.isActive ? "bg-black text-white" : "bg-gray-200"
                 }`}
+                onClick={() => handleSizeClick(index)}
               >
                 {size.name}
               </button>
@@ -217,9 +268,13 @@ const Item = () => {
           <hr className="border-gray-200 py-2" />
           <div className="flex gap-8">
             <div className="flex w-44 h-12 p-4 rounded-full justify-between items-center bg-gray-200 text-lg">
-              <button className="text-4xl">-</button>
-              <p>1</p>
-              <button className="text-4xl">+</button>
+              <button className="text-4xl" onClick={decrementQuantity}>
+                -
+              </button>
+              <p>{quantity}</p>
+              <button className="text-4xl" onClick={incrementQuantity}>
+                +
+              </button>
             </div>
             <Button
               className="w-100 h-12 p-4 rounded-full bg-black text-white"
@@ -237,7 +292,7 @@ const Item = () => {
           {ratingComp.map((rate, index) => (
             <button
               key={index}
-              className={`text-xl font-medium text-center transition p-4 w-full h-full border-b border-gray-200 ${
+              className={`text-xl font-medium text-center transition p-4 w-full h-full border-b border-gray-200 cursor-pointer ${
                 rate.isActive ? "border-b-black" : ""
               }`}
             >

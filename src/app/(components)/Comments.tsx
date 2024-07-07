@@ -18,7 +18,7 @@ const Comment: React.FC<CommentProps> = ({ data }) => {
     <div className="p-3">
       <div
         key={data.id}
-        className="w-96 bg-white shadow-md rounded-xl border border-gray-300 p-4 mb-4"
+        className="w-96 bg-white shadow-md rounded-xl border border-gray-300 p-2 mb-4"
       >
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center gap-1">
@@ -29,7 +29,7 @@ const Comment: React.FC<CommentProps> = ({ data }) => {
           <BsThreeDots className="text-gray-500" />
         </div>
         <div className="flex items-center mb-4">
-          <h2 className="text-lg font-bold mr-2">{data.name}</h2>
+          <h2 className="text-lg font-bold mr-1">{data.name}</h2>
           <Image src={tick} alt="verified" width={20} height={20} />
         </div>
         <p className="text-base text-gray-600 mb-4">{data.discription.slice(0,130)}..</p>

@@ -1,49 +1,63 @@
 // models/Cart.js
 import mongoose from "mongoose";
-const itemSchema = new mongoose.Schema({
-  itemId: {
-    type: String,
-    required: true,
-  },
-  title: {
-    type: String,
-    required: true,
-  },
-  imageUrl: {
-    type: String,
-    required: true,
-  },
-  price: {
-    type: Number,
-    required: true,
-  },
-  discount: {
-    type: Number,
-    required: false,
-  },
-  discountPercent: {
-    type: Number,
-    required: false,
-  },
-  quantity: {
-    type: Number,
-    required: true,
-    default: 1,
-  },
-});
-
 const cartSchema = new mongoose.Schema(
   {
     userId: {
       type: String,
       required: true,
-      unique: true,
     },
-    items: {
-      type: [itemSchema],
-      required: true,
-      default: [],
-    },
+    items: [
+      {
+        id: {
+          type: String,
+          required: true,
+        },
+        category: {
+          type: String,
+          required: true,
+        },
+        item_type: {
+          type: String,
+          required: true,
+        },
+        rate: {
+          type: Number,
+          required: true,
+        },
+        imageUrl: {
+          type: String,
+          required: true,
+        },
+        title: {
+          type: String,
+          required: true,
+        },
+        discount: {
+          type: Number,
+          default: 0, // Default to 0 if undefined
+        },
+        price: {
+          type: Number,
+          required: true,
+        },
+        discountPercent: {
+          type: Number,
+          default: 0, // Default to 0 if undefined
+        },
+        colors: {
+          type: String,
+          required: true,
+        },
+        size: {
+          type: String,
+          required: true,
+        },
+        quantity: {
+          type: Number,
+          required: true,
+        },
+      },
+    ],
   },
   {
     timestamps: true,
