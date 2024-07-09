@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 import Loader from "../(components)/Loader/Loader";
+import { useToast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 
 interface CartItem {
   id: string;
@@ -25,6 +27,8 @@ interface CartItem {
 }
 
 const Cart = () => {
+  const { toast } = useToast();
+
   const { userId } = useAuth();
   const [loading, setLoading] = useState(true);
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -44,6 +48,29 @@ const Cart = () => {
       console.error("Error fetching cart data:", error);
     }
     setLoading(false);
+  };
+
+  const handleDelete = async (itemId: string) => {
+    try {
+      console.log(itemId, userId);
+      const response = await fetch(`/api/cart/${userId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ itemId }),
+      });
+      const result = await response.json();
+      console.log(result);
+      // if (result.success) {
+      //   setCart(cart.filter((item) => item.id !== itemId));
+      // } else {
+      //   console.error("Failed to delete item:", result.message);
+      // }
+      fetchCartData();
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
   };
 
   useEffect(() => {
@@ -106,7 +133,21 @@ const Cart = () => {
                       <h2 className="text-lg font-semibold text-gray-900">
                         {item.title}
                       </h2>
-                      <RiDeleteBin5Fill className="text-red-500 cursor-pointer" />
+                      <RiDeleteBin5Fill
+                        className="text-red-500 cursor-pointer"
+                        onClick={() => {
+                          handleDelete(item.id);
+                          toast({
+                            title: "Removed",
+                            description: "Item removed succesdully",
+                            action: (
+                              <ToastAction altText="Goto schedule to undo">
+                                Undo
+                              </ToastAction>
+                            ),
+                          });
+                        }}
+                      />
                     </div>
                     <div className="text-sm text-gray-600 mb-2">
                       Size: {item.size}

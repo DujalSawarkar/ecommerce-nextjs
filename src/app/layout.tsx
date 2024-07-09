@@ -3,14 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./(components)/Navbar";
 import Footer from "./(components)/Footer/Footer";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
+import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -29,6 +24,8 @@ export default function RootLayout({
         <body>
           <Navbar />
           {children}
+          <Toaster />
+
           <Footer />
         </body>
       </html>

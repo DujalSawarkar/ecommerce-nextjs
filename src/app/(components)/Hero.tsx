@@ -22,9 +22,11 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Comment from "./Comments";
-// import { UserButton } from "@clerk/nextjs";
+import { useToast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 
 const Hero = (props: any) => {
+  const { toast } = useToast();
   const Data = props.data;
   const head1 = "NEW ARRIVALS";
   const head2 = "TOP SELLINGS";
@@ -101,9 +103,25 @@ const Hero = (props: any) => {
                 garments, designed to bring out your individuality and cater to
                 your sense of style.
               </p>
-              <button className="w-32 md:w-40 h-12 md:h-14 rounded-[62px] bg-black text-white text-xl font-medium leading-[22px] mb-12 transition duration-300">
+              <button
+                className="w-32 md:w-40 h-12 md:h-14 rounded-[62px] bg-black text-white text-xl font-medium leading-[22px] mb-12 transition duration-300
+              
+              "
+                onClick={() => {
+                  toast({
+                    title: "Scheduled: Catch up",
+                    description: "Friday, February 10, 2023 at 5:57 PM",
+                    action: (
+                      <ToastAction altText="Goto schedule to undo">
+                        Undo
+                      </ToastAction>
+                    ),
+                  });
+                }}
+              >
                 Shop Now
               </button>
+
               <div className="flex gap-4 md:gap-8">
                 <div>
                   <h1 className="text-3xl md:text-4xl font-semibold">200+</h1>

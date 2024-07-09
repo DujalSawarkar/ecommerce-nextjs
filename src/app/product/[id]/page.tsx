@@ -11,6 +11,8 @@ import Faq from "@/app/(components)/items/Faq";
 import ProductInfo from "@/app/(components)/items/ProductInfo";
 import { useParams } from "next/navigation";
 import { useAuth } from "@clerk/nextjs"; // Import Clerk useAuth hook
+import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "@/components/ui/use-toast";
 
 const Item = () => {
   const { id } = useParams(); // Assuming you use Next.js useRouter hook for getting id
@@ -19,11 +21,14 @@ const Item = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const { userId } = useAuth(); // Get the userId from Clerk
   const [quantity, setQuantity] = useState<number>(1); // Initialize quantity state
+  const [buttonText, setButtonText] = useState<string>("Add to Cart"); // Initialize button text
   const [colorOptions, setColorOptions] = useState([
-    { name: "bg-yellow-500", isActive: false },
-    { name: "bg-rose-500", isActive: true },
-    { name: "bg-blue-500", isActive: false },
+    { name: "yellow", isActive: false },
+    { name: "black", isActive: true },
+    { name: "blue", isActive: false },
   ]);
+  const { toast } = useToast();
+
   const [sizeOptions, setSizeOptions] = useState([
     { name: "Small", isActive: false },
     { name: "Medium", isActive: true },
@@ -95,6 +100,7 @@ const Item = () => {
 
       const result = await response.json();
       console.log("Item added to cart:", result);
+      setButtonText("Added to Cart"); // Change the button text upon successful addition
     } catch (error) {
       console.error("Error adding to cart:", error);
     }
@@ -235,9 +241,9 @@ const Item = () => {
             {colorOptions.map((c, index) => (
               <div
                 key={index}
-                className={`${
+                className={`bg-${
                   c.name
-                } border border-black rounded-full w-9 h-9 flex items-center justify-center cursor-pointer ${
+                }-500 border border-black rounded-full w-9 h-9 flex items-center justify-center cursor-pointer ${
                   c.isActive ? "ring-2 ring-black" : ""
                 }`}
                 onClick={() => handleColorClick(index)}
@@ -278,9 +284,17 @@ const Item = () => {
             </div>
             <Button
               className="w-100 h-12 p-4 rounded-full bg-black text-white"
-              onClick={addToCart}
+              onClick={() => {
+                addToCart();
+                toast({
+                  title: "Item added to cart",
+                  description:
+                    "The item has been successfully added to your cart.",
+                  action: <ToastAction altText="Undo">Undo</ToastAction>,
+                });
+              }}
             >
-              Add to Cart
+              {buttonText}
             </Button>
           </div>
         </div>

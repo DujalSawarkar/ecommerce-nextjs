@@ -1,12 +1,12 @@
-// src/app/api/cart/route.ts
 import { connect } from "@/dbconfig/dbConfig";
 import { NextRequest, NextResponse } from "next/server";
 import Cart from "@/models/cartModel";
 
+
 // Ensure the database is connected
 connect();
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
   try {
     const body = await req.json(); // Parse the request body
     const { userId, item } = body;
