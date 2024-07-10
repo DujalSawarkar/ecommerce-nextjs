@@ -3,18 +3,13 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-
 import { FaShoppingCart } from "react-icons/fa";
 import { RiSearchLine, RiArrowDropDownLine } from "react-icons/ri";
-import Cookies from "js-cookie";
 import shopco from "@/app/imgs/SHOP.CO.png";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
-  const router = useRouter();
-
   return (
     <div className="bg-white shadow-sm">
       <div className=" mx-auto flex items-center p-2 justify-between h-[11vh]">

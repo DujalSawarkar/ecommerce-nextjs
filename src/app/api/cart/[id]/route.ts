@@ -47,7 +47,7 @@ export async function DELETE(
 
     // Remove the item from the cart
     cart.items = cart.items.filter(
-      (item: any) => item.id.toString() !== itemId
+      (item: any) => item._id.toString() !== itemId
     );
 
     // Save the updated cart

@@ -24,6 +24,7 @@ interface CartItem {
   colors: string;
   size: string;
   quantity: number;
+  _id: string;
 }
 
 const Cart = () => {
@@ -38,7 +39,7 @@ const Cart = () => {
       if (!userId) throw new Error("User ID is undefined");
       const response = await fetch(`/api/cart/${userId}`);
       const result = await response.json();
-      console.log("Cart data:", result);
+      console.log("Cart data:", result.data.items);
       if (result.success) {
         setCart(result.data.items);
       } else {
@@ -61,7 +62,7 @@ const Cart = () => {
         body: JSON.stringify({ itemId }),
       });
       const result = await response.json();
-      console.log(result);
+      // console.log(result.data);
       // if (result.success) {
       //   setCart(cart.filter((item) => item.id !== itemId));
       // } else {
@@ -136,7 +137,8 @@ const Cart = () => {
                       <RiDeleteBin5Fill
                         className="text-red-500 cursor-pointer"
                         onClick={() => {
-                          handleDelete(item.id);
+                          console.log("Delete item:", item);
+                          handleDelete(item._id);
                           toast({
                             title: "Removed",
                             description: "Item removed succesdully",
