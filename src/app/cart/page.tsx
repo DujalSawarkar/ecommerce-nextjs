@@ -10,6 +10,7 @@ import Link from "next/link";
 import Loader from "../(components)/Loader/Loader";
 import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
+import axios from "axios";
 
 interface CartItem {
   id: string;
@@ -62,15 +63,31 @@ const Cart = () => {
         body: JSON.stringify({ itemId }),
       });
       const result = await response.json();
-      // console.log(result.data);
-      // if (result.success) {
-      //   setCart(cart.filter((item) => item.id !== itemId));
-      // } else {
-      //   console.error("Failed to delete item:", result.message);
-      // }
       fetchCartData();
     } catch (error) {
       console.error("Error deleting item:", error);
+    }
+  };
+
+  const handlePayment = async () => {
+    const amount = getTotal("subtotal") - getTotal("discount") + 15;
+    const currency = "INR";
+    const receipt = "receipt#1720796823782";
+
+    try {
+      console.log("Processing payment...", amount, currency, receipt);
+      const response = await axios.post("/api/razorpay", {
+        amount,
+        currency,
+        receipt,
+      });
+
+      console.log("Payment response:", response.data);
+
+      // Further processing logic
+    } catch (error) {
+      console.error("Error processing payment:", error);
+      alert("Error processing payment");
     }
   };
 
@@ -212,7 +229,10 @@ const Cart = () => {
                 Apply
               </Button>
             </div>
-            <Button className="w-full h-12 rounded-full bg-black text-white font-semibold">
+            <Button
+              className="w-full h-12 rounded-full bg-black text-white font-semibold"
+              onClick={handlePayment}
+            >
               Go to Checkout
             </Button>
           </div>
