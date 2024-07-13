@@ -1,4 +1,8 @@
+// your component file
 "use client";
+
+// declare var Razorpay: any;
+import Razorpay from "razorpay";
 
 import React, { useEffect, useState } from "react";
 import { FiTag } from "react-icons/fi";
@@ -30,7 +34,6 @@ interface CartItem {
 
 const Cart = () => {
   const { toast } = useToast();
-
   const { userId } = useAuth();
   const [loading, setLoading] = useState(true);
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -40,7 +43,6 @@ const Cart = () => {
       if (!userId) throw new Error("User ID is undefined");
       const response = await fetch(`/api/cart/${userId}`);
       const result = await response.json();
-      console.log("Cart data:", result.data.items);
       if (result.success) {
         setCart(result.data.items);
       } else {
@@ -54,7 +56,6 @@ const Cart = () => {
 
   const handleDelete = async (itemId: string) => {
     try {
-      console.log(itemId, userId);
       const response = await fetch(`/api/cart/${userId}`, {
         method: "DELETE",
         headers: {
@@ -75,16 +76,55 @@ const Cart = () => {
     const receipt = "receipt#1720796823782";
 
     try {
-      console.log("Processing payment...", amount, currency, receipt);
       const response = await axios.post("/api/razorpay", {
         amount,
         currency,
         receipt,
       });
 
-      console.log("Payment response:", response.data);
+      const { data } = await response;
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        amount: data.data.amount,
+        currency: data.data.currency,
+        name: "SHOP>CO",
+        description: "Test Transaction",
+        image: "https://example.com/your_logo",
+        order_id: data.id,
+        handler: function (response: any) {
+          console.log(response.razorpay_payment_id);
+          console.log(response.razorpay_order_id);
+          console.log(response.razorpay_signature);
+        },
+        prefill: {
+          name: "Dujal Sawarkar",
+          email: "Dujalsawarkar5@gmail.com",
+          contact: "8605090478",
+        },
+        notes: {
+          address: "Razorpay Corporate Office",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
 
-      // Further processing logic
+      // Wait for Razorpay script to be fully loaded
+      const loadRazorpay = async () => {
+        if (!window.Razorpay) {
+          await new Promise((resolve) => {
+            const script = document.createElement("script");
+            script.src = "https://checkout.razorpay.com/v1/checkout.js";
+            script.onload = resolve;
+            document.head.appendChild(script);
+          });
+        }
+      };
+
+      await loadRazorpay();
+
+      const rzp = new window.Razorpay(options);
+      rzp.open();
     } catch (error) {
       console.error("Error processing payment:", error);
       alert("Error processing payment");
@@ -154,7 +194,6 @@ const Cart = () => {
                       <RiDeleteBin5Fill
                         className="text-red-500 cursor-pointer"
                         onClick={() => {
-                          console.log("Delete item:", item);
                           handleDelete(item._id);
                           toast({
                             title: "Removed",
