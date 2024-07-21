@@ -58,7 +58,6 @@ const Item = () => {
 
   const addToCart = async () => {
     if (!userId) {
-      console.log("User is not authenticated");
       return;
     }
 
@@ -81,7 +80,7 @@ const Item = () => {
     };
 
     try {
-      console.log("Adding item to cart:", itemData);
+
 
       const response = await fetch("/api/cart", {
         method: "POST",
@@ -99,7 +98,7 @@ const Item = () => {
       }
 
       const result = await response.json();
-      console.log("Item added to cart:", result);
+
       setButtonText("Added to Cart"); // Change the button text upon successful addition
     } catch (error) {
       console.error("Error adding to cart:", error);

@@ -15,7 +15,7 @@ const Home = () => {
       console.log(error);
     }
   };
-  // console.log(Productdata);
+
 
   useEffect(() => {
     FetchProductData();

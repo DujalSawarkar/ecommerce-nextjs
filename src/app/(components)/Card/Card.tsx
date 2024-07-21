@@ -20,7 +20,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
   const id: string = data._id;
   const type = data.item_type;
   const divArray = Array.from({ length: data.rate }, (_, index) => index);
-  // console.log(type, id);
+
 
   return (
     <Link href={`/product/${id}`}>

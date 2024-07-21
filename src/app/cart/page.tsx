@@ -83,6 +83,7 @@ const Cart = () => {
       });
 
       const { data } = await response;
+     
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         amount: data.data.amount,
@@ -92,9 +93,10 @@ const Cart = () => {
         image: "https://example.com/your_logo",
         order_id: data.id,
         handler: function (response: any) {
+       
           console.log(response.razorpay_payment_id);
-          console.log(response.razorpay_order_id);
-          console.log(response.razorpay_signature);
+          // console.log(response.razorpay_order_id);
+          // console.log(response.razorpay_signature);
         },
         prefill: {
           name: "Dujal Sawarkar",
@@ -108,7 +110,7 @@ const Cart = () => {
           color: "#3399cc",
         },
       };
-
+ 
       // Wait for Razorpay script to be fully loaded
       const loadRazorpay = async () => {
         if (!window.Razorpay) {

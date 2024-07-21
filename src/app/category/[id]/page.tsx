@@ -43,7 +43,7 @@ const Category = () => {
   const dressStyle = ["casuals", "formals", "party", "gym"];
 
   const { id } = useParams() as { id: string };
-  console.log(id);
+
   const [filterHide, setFilterHide] = useState(true);
   const [price, setPrice] = useState(true);
   const [Color, setColor] = useState(true);
@@ -57,7 +57,7 @@ const Category = () => {
   const fetchProductsByCategory = async (category: string) => {
     try {
       const data = await axios.get(`/api/category/${id}`);
-      console.log(data.data.data);
+
       setCatData(data.data.data); // Ensure the response structure matches this
     } catch (error) {
       console.error("Error fetching products:", error);

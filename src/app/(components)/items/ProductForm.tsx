@@ -52,7 +52,7 @@ const ProductForm = () => {
       totalQuantityAvailable: parseInt(formData.totalQuantityAvailable, 10),
       colors: colorsArray,
     };
-    console.log("Data to send:", data);
+  
 
     try {
       const response = await fetch("/api/product", {
@@ -65,7 +65,7 @@ const ProductForm = () => {
 
       if (response.ok) {
         const product = await response.json();
-        console.log("Product created:", product);
+        
         // Reset form or show success message
       } else {
         const errorData = await response.json();
