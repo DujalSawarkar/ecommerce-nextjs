@@ -15,7 +15,14 @@ import Loader from "../(components)/Loader/Loader";
 import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
 import axios from "axios";
-
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 interface CartItem {
   id: string;
   title: string;
@@ -83,7 +90,7 @@ const Cart = () => {
       });
 
       const { data } = await response;
-     
+
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         amount: data.data.amount,
@@ -93,7 +100,6 @@ const Cart = () => {
         image: "https://example.com/your_logo",
         order_id: data.id,
         handler: function (response: any) {
-       
           console.log(response.razorpay_payment_id);
           // console.log(response.razorpay_order_id);
           // console.log(response.razorpay_signature);
@@ -110,7 +116,7 @@ const Cart = () => {
           color: "#3399cc",
         },
       };
- 
+
       // Wait for Razorpay script to be fully loaded
       const loadRazorpay = async () => {
         if (!window.Razorpay) {
@@ -129,7 +135,6 @@ const Cart = () => {
       rzp.open();
     } catch (error) {
       console.error("Error processing payment:", error);
-      alert("Error processing payment");
     }
   };
 
@@ -160,6 +165,19 @@ const Cart = () => {
 
   return (
     <div className="bg-white min-h-screen py-8">
+      <Breadcrumb className="ml-8 mb-4">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/cart">Cart</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+        </BreadcrumbList>
+      </Breadcrumb>
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-4xl font-bold leading-10 uppercase text-gray-900 mb-8">
           Your Cart
@@ -217,16 +235,18 @@ const Cart = () => {
                     </div>
                     <div className="flex items-center">
                       <p className="text-xl font-semibold text-gray-900 mr-2">
-                        ${item.discount ? item.discount : item.price}
+                        ₹{item.discount ? item.discount : item.price}
                       </p>
                       <div className="flex items-center space-x-2">
-                        <Button className="w-8 h-8 bg-gray-300 text-xl font-semibold leading-none">
+                        {/* <Button className="w-8 h-8 bg-gray-300 text-xl font-semibold leading-none">
                           -
-                        </Button>
-                        <span className="text-base">{item.quantity}</span>
-                        <Button className="w-8 h-8 bg-gray-300 text-xl font-semibold leading-none">
+                        </Button> */}
+                        <span className="text-base font-semibold">
+                          Quantity : {item.quantity}
+                        </span>
+                        {/* <Button className="w-8 h-8 bg-gray-300 text-xl font-semibold leading-none">
                           +
-                        </Button>
+                        </Button> */}
                       </div>
                     </div>
                   </div>
@@ -238,25 +258,25 @@ const Cart = () => {
             <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
             <div className="flex justify-between mb-2">
               <p className="text-base text-gray-600">Subtotal</p>
-              <h3 className="text-base font-semibold">
-                ${getTotal("subtotal")}
+              <h3 className="text-base font-bold">
+                ₹{getTotal("subtotal")}
               </h3>
             </div>
             <div className="flex justify-between mb-2">
               <p className="text-base text-gray-600">Discount</p>
-              <h4 className="text-base font-semibold">
-                -${getTotal("discount")}
+              <h4 className="text-base font-bold text-red-600">
+                - ₹{getTotal("discount")}
               </h4>
             </div>
             <div className="flex justify-between mb-2">
               <p className="text-base text-gray-600">Delivery Fee</p>
-              <h3 className="text-base font-semibold">$15</h3>
+              <h3 className="text-base font-bold"> ₹15</h3>
             </div>
             <hr className="my-4 border-t border-gray-300" />
             <div className="flex justify-between mb-4">
               <p className="text-base text-gray-600">Total</p>
-              <h3 className="text-base font-semibold">
-                ${getTotal("subtotal") - getTotal("discount") + 15}
+              <h3 className="text-base font-bold">
+                ₹{getTotal("subtotal") - getTotal("discount") + 15}
               </h3>
             </div>
             <div className="flex items-center mb-4">

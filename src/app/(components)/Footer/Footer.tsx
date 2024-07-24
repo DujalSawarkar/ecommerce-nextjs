@@ -12,6 +12,7 @@ import Gpay from "@/app/imgs/PaymentImg/GPay.png";
 import Badge from "@/app/imgs/PaymentImg/Badge.png";
 import Paypal from "@/app/imgs/PaymentImg/Paypal.png";
 import shopco from "@/app/imgs/SHOP.CO.png";
+
 const Footer = () => {
   const FooterData = [
     {
@@ -50,33 +51,33 @@ const Footer = () => {
 
   return (
     <div className="mt-60 relative">
-      <div className="flex justify-around items-center bg-black text-white h-52 rounded-3xl absolute bottom-80 mx-20">
-        <div className="w-1/2 text-4xl font-extrabold leading-[45px] text-left">
+      <div className="lg:flex flex-col md:flex-row justify-around items-center bg-black text-white h-52 rounded-3xl absolute bottom-80 mx-4 md:mx-20 p-4 md:p-0 -top-100">
+        <div className="w-full lg:w-1/2 text-2xl md:text-4xl font-extrabold leading-[30px] md:leading-[45px] text-center md:text-left">
           STAY UPTO DATE ABOUT OUR LATEST OFFERS
         </div>
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-4 w-full md:w-auto">
           <input
             type="text"
             placeholder="Enter your email address"
-            className="p-4 w-[27rem] h-12 rounded-full text-black text-base font-normal leading-6"
+            className="p-2 md:p-4 w-full md:w-[27rem] h-10 md:h-12 rounded-full text-black text-base font-normal leading-6"
           />
-          <button className="w-[27rem] h-12 rounded-full text-base font-medium leading-6 bg-white text-black hover:cursor-pointer">
+          <button className="w-full md:w-[27rem] h-10 md:h-12 rounded-full text-base font-medium leading-6 bg-white text-black hover:cursor-pointer ">
             Subscribe to Newsletter
           </button>
         </div>
       </div>
       <div>
-        <div className="flex justify-evenly w-full h-2/5 pt-40 pb-4 bg-gray-100 gap-8">
-          <div className="w-1/5">
+        <div className="flex flex-wrap justify-evenly w-full h-auto pt-20 md:pt-40 pb-4 bg-gray-100 gap-8">
+          <div className="w-full md:w-1/5 text-center md:text-left">
             <Image src={shopco} alt="Your Logo" width={100} height={50} />
             <br />
             <br />
             <p>
-              We have clothes that suits your style and which you’re proud to
+              We have clothes that suit your style and which you’re proud to
               wear. From women to men.
             </p>
             <br />
-            <div className="flex gap-4">
+            <div className="flex justify-center md:justify-start gap-4">
               <div className="border border-black w-11 h-11 flex justify-center items-center rounded-full overflow-hidden">
                 <IoLogoTwitter />
               </div>
@@ -98,56 +99,46 @@ const Footer = () => {
         </div>
 
         <hr />
-        <div className="bg-gray-100 p-4 flex justify-between relative">
-          <div className="text-sm font-normal leading-5 text-right text-gray-600">
+        <div className="bg-gray-100 p-4 flex flex-col md:flex-row justify-between items-center relative">
+          <div className="text-sm font-normal leading-5 text-center md:text-right text-gray-600 mb-4 md:mb-0">
             Shop.co © 2000-2023, All Rights Reserved
           </div>
-          <div className="flex items-center">
-            <div>
-              <Image
-                src={visa}
-                alt="Visa"
-                width={50}
-                height={30}
-                className="hover:cursor-pointer"
-              />
-            </div>
-            <div>
-              <Image
-                src={ApplePay}
-                alt="Apple Pay"
-                width={50}
-                height={30}
-                className="hover:cursor-pointer"
-              />
-            </div>
-            <div>
-              <Image
-                src={Gpay}
-                alt="Google Pay"
-                width={50}
-                height={30}
-                className="hover:cursor-pointer"
-              />
-            </div>
-            <div>
-              <Image
-                src={Badge}
-                alt="Badge"
-                width={50}
-                height={30}
-                className="hover:cursor-pointer"
-              />
-            </div>
-            <div>
-              <Image
-                src={Paypal}
-                alt="Paypal"
-                width={50}
-                height={30}
-                className="hover:cursor-pointer"
-              />
-            </div>
+          <div className="flex gap-4 justify-center">
+            <Image
+              src={visa}
+              alt="Visa"
+              width={50}
+              height={30}
+              className="hover:cursor-pointer"
+            />
+            <Image
+              src={ApplePay}
+              alt="Apple Pay"
+              width={50}
+              height={30}
+              className="hover:cursor-pointer"
+            />
+            <Image
+              src={Gpay}
+              alt="Google Pay"
+              width={50}
+              height={30}
+              className="hover:cursor-pointer"
+            />
+            <Image
+              src={Badge}
+              alt="Badge"
+              width={50}
+              height={30}
+              className="hover:cursor-pointer"
+            />
+            <Image
+              src={Paypal}
+              alt="Paypal"
+              width={50}
+              height={30}
+              className="hover:cursor-pointer"
+            />
           </div>
         </div>
       </div>

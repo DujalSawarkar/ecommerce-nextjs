@@ -21,7 +21,6 @@ const Card: React.FC<CardProps> = ({ data }) => {
   const type = data.item_type;
   const divArray = Array.from({ length: data.rate }, (_, index) => index);
 
-
   return (
     <Link href={`/product/${id}`}>
       <div className="transition ease-in-out duration-400 my-4 hover:scale-105 hover:cursor-pointer">
@@ -52,17 +51,17 @@ const Card: React.FC<CardProps> = ({ data }) => {
           {data.discount ? (
             <>
               <h2 className="text-xl font-bold leading-[32px]">
-                ${data.discount}
+                ₹{data.discount}
               </h2>
               <p className="text-xl font-bold leading-[32px] line-through text-gray-500">
-                ${data.price}
+                ₹{data.price}
               </p>
               <div className="flex justify-center items-center bg-[#FDDDDE] rounded-full px-3 py-1 text-[#F53131]">
                 -{data.discountPercent}%
               </div>
             </>
           ) : (
-            <h2 className="text-xl font-bold leading-[32px]">${data.price}</h2>
+            <h2 className="text-xl font-bold leading-[32px]"> ₹{data.price}</h2>
           )}
         </div>
       </div>

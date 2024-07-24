@@ -13,6 +13,14 @@ import { useParams } from "next/navigation";
 import { useAuth } from "@clerk/nextjs"; // Import Clerk useAuth hook
 import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 const Item = () => {
   const { id } = useParams(); // Assuming you use Next.js useRouter hook for getting id
@@ -80,8 +88,6 @@ const Item = () => {
     };
 
     try {
-
-
       const response = await fetch("/api/cart", {
         method: "POST",
         headers: {
@@ -159,8 +165,28 @@ const Item = () => {
   ];
 
   return (
-    <div>
+    <div className="p-4">
       {/* Product Images and Basic Details */}
+      <Breadcrumb className="ml-6">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+
+          <BreadcrumbItem>
+            <BreadcrumbLink href={`/category/${data.category}`}>
+              {data.category}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href={`/category/${data.item_type}`}>
+              {data.item_type}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
       <div className="w-full mx-auto flex p-4 pb-6 mb-4">
         <div className="h-[75vh] w-3/4 flex">
           {/* Color options */}
