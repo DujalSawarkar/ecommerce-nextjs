@@ -1,5 +1,7 @@
 
 # Ecommerce-NextJS
+![image](https://github.com/user-attachments/assets/7a1d220c-3abc-4cbb-abee-dd23632b4fd9)
+
 
 An e-commerce platform built with Next.js, providing a seamless shopping experience.
 
